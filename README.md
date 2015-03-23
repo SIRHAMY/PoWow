@@ -1,2 +1,5 @@
 # PoWow
-Hyper local social discussions
+Hyper-local, social discussions
+
+Directory Structure
+===================

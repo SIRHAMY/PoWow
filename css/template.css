@@ -1,0 +1,72 @@
+/**
+ This CSS represents the skeleton stylesheet for template.html
+ 
+ created: 03/22/2015
+ author:  Brendan McGarry
+ */
+
+html, body {
+    background-color: #FFFFFF;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}
+
+#body-inner {
+    background-color: #00FFFF;
+    height: 100%; 
+    margin-left: auto;
+    margin-right: auto;       
+    max-height: 100%;
+    min-height: 100%;
+}
+ 
+#body-outer {
+    background-color: #00FF00;
+    /* Note(ALL): make sure outer header, footer, and body don't add up past
+                  100% */
+    height: 70%;
+    max-height: 70%;
+    min-height: 70%;
+}
+
+#footer-inner {
+    background-color: #FF00FF;
+    height: 100%; 
+    margin-left: auto;
+    margin-right: auto;       
+    max-height: 100%;
+    min-height: 100%;
+}
+ 
+#footer-outer {
+    background-color: #0000FF;
+    /* Note(ALL): make sure outer header, footer, and body don't add up past
+                  100% */
+    height: 15%;
+    max-height: 15%;
+    min-height: 15%;
+}
+
+#header-inner {
+    background-color: #FFFF00;
+    height: 100%; 
+    margin-left: auto;
+    margin-right: auto;       
+    max-height: 100%;
+    min-height: 100%;
+}
+ 
+#header-outer {
+    background-color: #FF0000;
+    /* Note(ALL): make sure outer header, footer, and body don't add up past
+                  100% */
+    height: 15%;
+    max-height: 15%;
+    min-height: 15%;
+}
+ 
+.wrapper {
+    width: 768px;
+}
