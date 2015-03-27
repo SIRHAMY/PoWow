@@ -11,7 +11,7 @@
     <head>
         <meta charset="UTF-8">
         <!-- page slogan/subtitle -->
-        <meta name="description" content="hyper-local, social discussions">
+        <meta name="description" content="hyper-local social discussions">
         <!-- TODO(ALL): think of some keywords for SEO? -->
         <meta name="keywords" content="forum,Q&A,local">
         <meta name="author" content="Brendan McGarry">
@@ -20,7 +20,7 @@
              NOTE(ALL): make sure the slogan matches the 'description' meta
                         tag above -->
         <title>
-            PoWow: Hyper-Local, Social Discussions
+            PoWow: Hyper-Local Social Discussions
         </title>
         <!-- global CSS -->
         <link rel="stylesheet" type="text/css" href="./../css/common.css">
@@ -32,19 +32,52 @@
                used to set header height, bg color -->
         <div id="header-outer">
             <div id="header-inner" class="wrapper">
+                
+                <img id="logo" src="./../img/logo_150x150.png" />
+                <!--
+                <h1 id="title">
+                    PoWow: 
+                </h1>
+                <h2 class="subtitle">Hyper-Local&nbsp;</h2>
+                <h2 class="subtitle">Social Discussions</h2>
+                -->                
             </div>
         </div>
+        
+        <!-- navigation bar.  this object is sticky and will follow the user
+             down the page -->
+        <div id="navigation-outer">
+            <div id="navigation-inner" class="wrapper">
+                <ul>
+                    <li id="nav-icon"></li>
+                    <li id="nav-categories">[current category]</li>
+                    <li id="nav-profile"></li>
+                </ul>
+            </div>
+        </div>
+        
         <!-- outer body wrapper:
                used to set body section height, bg color -->
         <div id="body-outer">
+            <!-- inner body class, used to serve as a wrapper for content -->
             <div id="body-inner" class="wrapper">
+                
+                <!-- content area actually holds all of the information, whereas the
+                     body-inner div just serves as a wrapper, managing the size and
+                     floating of the content -->                
+                <div id="content-area"> 
+                    text
+                </div>                
             </div>
         </div>
         <!-- outer footer wrapper:
                used to set footer height, bg color -->
+        
         <div id="footer-outer">
             <div id="footer-inner" class="wrapper">
+                &#169; Brendan McGarry and Hamilton Greene 2015
             </div>
         </div>
+        
     </body>
 </html>
