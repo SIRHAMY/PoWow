@@ -36,6 +36,7 @@
  * #F1EBDF   Cream
  * #A19378   Dark Brown
  * #878068   Brown Grey
+ * #E08036   Orange
  */
 
 /**--------------------
@@ -47,9 +48,9 @@
     }
 }
  
- /**--------------------
-  * Media queries - height
-  * --------------------*/
+/**--------------------
+ * Media queries - height
+ * --------------------*/
 @media all and (max-height: 480px) {
     #logo {
         height: 50px;
@@ -101,7 +102,7 @@
 }
 
 /**--------------------
- * Classes
+ * Tags
  * --------------------*/
  
 * {
@@ -126,6 +127,75 @@ html, body {
     padding: 0px;
     width: 100%;
 }
+
+/**--------------------
+ * Classes
+ * --------------------*/
+
+.post {
+    border-style: solid;
+    border-bottom-width: 2px;
+    border-left-width: 10px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-color: #A19378;
+    font-size: 20px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding: 3px;
+    width: 100%;
+}
+
+.post:hover {
+    border-color: #E08036;
+}
+
+.post-metadata {
+    /*background-color: #0000FF;*/
+    font-size: 10px;
+    padding: 2px;
+}
+
+.post-pinned {
+    /*background-color: #FF0000;*/
+    height: 25px;
+    width: 25px;
+}
+
+.post-title {
+    /*background-color: #00FF00;*/
+    display: inline-block;
+    margin: 5px;
+}
+ 
+.sticky {
+    position: fixed;
+    z-index: 100;
+    left: 0px;
+    top: 0px;
+}
+ 
+.subtitle {
+    /*background-color: #0000FF;*/
+    display: block;
+    float: left;
+}
+
+.wrapper {
+    background-color: #000000;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    max-width: 1000px;
+    /* NOTE(ALL): make sure min width matches html,body */
+    min-width: 320px;
+    position: relative;
+}
+ 
+/**--------------------
+ * IDs
+ * --------------------*/
 
 #body-inner {
     background-color: #C9C0A3/*#C9C0A3/*F1EBDF*/;
@@ -170,12 +240,21 @@ html, body {
 #login {
     background-color: #CFCFCF;
     border-style: solid;
-    border-color: #6C6D70;
-    margin-bottom: 10px;
+    border-color: #A19378;
+    margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
-    width: 290px;
+    position: relative;
+    width: 285px;
+}
+
+#login-close {
+    color: #6C6D70;
+    font-weight: bold;
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }
 
 #login-form {
@@ -218,6 +297,10 @@ html, body {
     max-width: 150px;
 }
 
+#posts {
+    /*background-color: #FF0000;*/
+}
+
 #nav-cat {
     height: 20px;
     position: absolute;
@@ -228,6 +311,13 @@ html, body {
 #nav-cur-cat {
     color: #FFFFFF;
     font-size: 18px;
+}
+
+#nav-pinned {
+    height: 20px;
+    position: absolute;
+    right: 40px;
+    width: 20px;
 }
 
 #nav-settings {
@@ -252,41 +342,12 @@ html, body {
     width: 100%;
 }
 
-.subtitle {
-    /*background-color: #0000FF;*/
-    display: block;
-    float: left;
-}
-
 #title {
     /*background-color: #FF00FF;*/
     color: #FFFFFF;
     display: block;
     float: left;
     margin-top: 10px;
-}
- 
-.wrapper {
-    background-color: #000000;
-    margin-bottom: 0px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 0px;
-    max-width: 1000px;
-    /* NOTE(ALL): make sure min width matches html,body */
-    min-width: 320px;
-    position: relative;
-}
-
-/**
- * TEST CODE
- */
-
-.sticky {
-    position: fixed;
-    z-index: 100;
-    left: 0px;
-    top: 0px;
 }
 
 #window-stats {

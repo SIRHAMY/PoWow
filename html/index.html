@@ -55,6 +55,7 @@
             <div id="navigation-inner" class="wrapper">
                     <img id="nav-cat" src="./../img/categories_25x25.png" />
                     <span id="nav-cur-cat">[Current Category]</span>
+                    <img id="nav-pinned" src="./../img/pin-white_25x25.png" />
                     <img id="nav-settings" src="./../img/settings_25x25.png" />
             </div>
         </div>
@@ -76,6 +77,7 @@
                     
                     <!-- login box -->
                     <div id="login">
+                        <span id="login-close">X</span>
                         <form id="login-form">
                             <span id="login-form-title">Welcome to PoWoW:</span>
                             <br />
@@ -88,6 +90,54 @@
                         </form>
                     </div>
                     
+                    <!-- list of posts we pulled to show the user -->
+                    <div id="posts">
+                    
+                        <!-- single question instance that was posted -->
+                        <div class="post">
+                            <!-- "pin this question" button -->
+                            <img class="post-pinned" src="./../img/pin-grey_25x25.png" />
+                            <!-- question title -->
+                            What is a good place for late-night munchies?
+                            <!-- statistics/metadata about the question -->
+                            <div class="post-metadata">
+                                asked by: 420_BlazeBro in Food 256 answers 4 pins 
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <img class="post-pinned" src="./../img/pin-grey_25x25.png" />
+                            Where is the nearest bike repair shop?
+                            <div class="post-metadata">
+                                asked by: dan_3895 in Transportation 5 answers 1 pins 
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <img class="post-pinned" src="./../img/pin-grey_25x25.png" />
+                            Why is kale considered a super food now?
+                            <div class="post-metadata">
+                                asked by: its_me_sarah in Health 100 answers 17 pins 
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <img class="post-pinned" src="./../img/pin-grey_25x25.png" />
+                            How do I stop my leg from bleeding?
+                            <div class="post-metadata">
+                                asked by: dirty_dave in Health 3 answers 0 pins 
+                            </div>
+                        </div>
+                        
+                        <div class="post">
+                            <img class="post-pinned" src="./../img/pin-grey_25x25.png" />
+                            No seriously, who farted?
+                            <div class="post-metadata">
+                                asked by: bloop in Misc 29 answers 4 pins 
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>                
             </div>
         </div>
@@ -96,7 +146,8 @@
         
         <div id="footer-outer">
             <div id="footer-inner" class="wrapper">
-                &#169; Brendan McGarry and Hamilton Greene 2015
+                &#169; Brendan McGarry and Hamilton Greene 2015. 
+                Optimized for devices with a minimum resolution of 480x320 pixels
             </div>
         </div>
         
