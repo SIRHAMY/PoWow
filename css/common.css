@@ -30,6 +30,7 @@
 /* NOTE(ALL): color palette
  * #3F3F41   Dark Grey
  * #6C6D70   Medium Grey
+ * #CFCFCF   Light Grey
  * #A1997E   Dark Beige
  * #C9C0A3   Light Beige
  * #F1EBDF   Cream
@@ -37,64 +38,77 @@
  * #878068   Brown Grey
  */
 
-/**
+/**--------------------
  * Media queries - width
- */
-@media all and (max-width: 479px) and (min-width: 320px) {
-}
-
-@media all and (max-width: 599px) and (min-width: 480px) {
-}
-
-@media all and (max-width: 757px) and (min-width: 600px) {
-}
-
+ * --------------------*/
 @media all and (min-width: 768px) {
+    .wrapper {
+        width: 80%;
+    }
 }
  
- /**
+ /**--------------------
   * Media queries - height
-  */
-@media all and (max-height: 479px) {
+  * --------------------*/
+@media all and (max-height: 480px) {
     #logo {
         height: 50px;
         width: 50px;
     }
+    #title {
+        font-size: 50px;
+    }
 }
   
-@media all and (max-height: 599px) and (min-height: 480px) {
+@media all and (max-height: 600px) and (min-height: 480px) {
     #logo {
         height: 70px;
         width: 70px;
     }
+    #title {
+        font-size: 60px;
+    }
 }
 
-@media all and (max-height: 799px) and (min-height: 600px) {
+@media all and (max-height: 800px) and (min-height: 601px) {
     #logo {
         height: 90px;
         width: 90px;
     }
+    #title {
+        font-size: 90px;
+    }
 }
 
-@media all and (max-height: 1023px) and (min-height: 800px) {
+@media all and (max-height: 1024px) and (min-height: 800px) {
     #logo {
         height: 120px;
         width: 120px;
     }
+    #title {
+        font-size: 120px;
+    }
 }
 
-@media all and (min-height: 1024px) {
+@media all and (min-height: 1025px) {
     #logo {
         height: 150px;
         width: 150px;
     }
+    #title {
+        font-size: 150px;
+    }
 }
+
+/**--------------------
+ * Classes
+ * --------------------*/
  
 * {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;    
-    color: #FFFFFF;
+    color: #3F3F41;
     /* TODO(ALL): manage fonts? */
     font-family: Helvetica, Serif;
     font-size: 100%;
@@ -115,59 +129,86 @@ html, body {
 
 #body-inner {
     background-color: #C9C0A3/*#C9C0A3/*F1EBDF*/;
-    /* Note(ALL): make sure outer header, footer, and body don't add up past
-                  100% */
     padding: 10px;
 }
  
 #body-outer {
     background-color: #A1997E;/*#4B4E50;#403F3D*/
-    /* Note(ALL): make sure outer header, footer, and body don't add up past
-                  100% */
-    /*min-height: 70%;*/
     position: relative;
 }
 
 #content-area {
-    background-color: #F1EBDF;    
-    /*
-    border-color: #C9C0A3;
-    border-style: solid;
-    border-width: 10px;*/
+    background-color: #F1EBDF;
     color: #3F3F41;
     padding: 5px;
 }
 
 #footer-inner {
     background-color: inherit;
+    color: #FFFFFF;
+    padding: 5px;
 }
  
 #footer-outer {
-    background-color: #3F3F41;
-    height: 15%;
-    /* Note(ALL): make sure outer header, footer, and body don't add up past
-                  100% */
-    max-height: 150px;    
+    background-color: #3F3F41; 
     min-height: 50px;
     position: relative;
 }
 
 #header-inner {
     background-color: inherit;
+    color: #FFFFFF;
 }
  
 #header-outer {
     background-color: #3F3F41;
-    /* Note(ALL): make sure outer header, footer, and body don't add up past
-                  100% */
     max-height: 150px;
     min-height: 50px;
     position: relative;
 }
 
+#login {
+    background-color: #CFCFCF;
+    border-style: solid;
+    border-color: #6C6D70;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    width: 290px;
+}
+
+#login-form {
+    padding: 10px;
+}
+
+#login-form > input {
+    margin: 2px;
+    padding: 2px;
+}
+
+#login-form-password {
+    width: 200px;
+}
+
+#login-form-register {
+}
+
+#login-form-submit {
+}
+
+#login-form-title {
+    display: block;
+    font-size: 20px;
+}
+
+#login-form-username {
+    width: 200px;
+}
+
 #logo {
     display: block;
-    float: left;    
+    float: left;
     margin-bottom: 10px;
     margin-right: 10px;
     margin-top: 10px;
@@ -177,37 +218,52 @@ html, body {
     max-width: 150px;
 }
 
+#nav-cat {
+    height: 20px;
+    position: absolute;
+    left: 5px;
+    width: 20px;
+}
+
+#nav-cur-cat {
+    color: #FFFFFF;
+    font-size: 18px;
+}
+
+#nav-settings {
+    height: 20px;
+    position: absolute;
+    right: 5px;
+    width: 20px;
+}
+
 #navigation-inner {
-    background-color: #6C6D70;
+    background-color: inherit;
     clear: both;
     height: 100%;
     text-align: center;
+    padding: 2px;
 }
 
 #navigation-outer {
     background-color: #6C6D70;
     height: 25px;
-    position: relative;
     clear: both;
+    width: 100%;
 }
 
 .subtitle {
     /*background-color: #0000FF;*/
     display: block;
     float: left;
-    /* TODO(Brendan): Use jQuery to set this dynamically + CSS media queries */
-    font-size: 50px;
 }
 
 #title {
     /*background-color: #FF00FF;*/
+    color: #FFFFFF;
     display: block;
     float: left;
-    /* TODO(Brendan): Use jQuery to set this dynamically + CSS media queries */
-    font-size: 100px;
-    margin: 0px;
-    margin-right: 10px;
-    padding: 0px;
+    margin-top: 10px;
 }
  
 .wrapper {
@@ -220,38 +276,23 @@ html, body {
     /* NOTE(ALL): make sure min width matches html,body */
     min-width: 320px;
     position: relative;
-    width: 80%;
 }
 
 /**
  * TEST CODE
  */
 
-
-
-li {
-    background-color: #0000FF;
-    display: inline-block;
-    list-style-type: none;
-}
-
-#nav-icon {
-    position: absolute;
+.sticky {
+    position: fixed;
+    z-index: 100;
     left: 0px;
-    width: 25px;
-    height: 25px;
+    top: 0px;
 }
 
-#nav-categories {
-    height: 25px;
+#window-stats {
+    background-color: #FFFF00;
+    text-align: center;
     font-size: 20px;
-    padding-top: 2px;
-}
-
-#nav-profile {
-    position: absolute;
-    right: 0px;
-    width: 25px;
-    height: 25px;
+    color: #000000;
 }
 

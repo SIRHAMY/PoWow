@@ -24,8 +24,14 @@
         </title>
         <!-- global CSS -->
         <link rel="stylesheet" type="text/css" href="./../css/common.css">
+        <!-- page specific CSS -->
+        <!-- -->
         <!-- global JS -->
-        <!-- <script type="text/javascript" src="./../js/script.js"></script> -->
+        <script type="text/javascript" src="./../js/lib/jquery-2.1.3.min.js"></script>
+        <script type="text/javascript" src="./../js/window_stats.js"></script>
+        <script type="text/javascript" src="./../js/sticky_nav.js"></script>
+        <!-- page specific JS -->
+        <!-- -->
     </head>
     <body>
         <!-- outer header wrapper:
@@ -33,14 +39,13 @@
         <div id="header-outer">
             <div id="header-inner" class="wrapper">
                 
-                <img id="logo" src="./../img/logo_150x150.png" />
-                <!--
+                <img id="logo" align="left" src="./../img/logo_150x150.png" />
                 <h1 id="title">
-                    PoWow: 
+                    PoWow
                 </h1>
-                <h2 class="subtitle">Hyper-Local&nbsp;</h2>
-                <h2 class="subtitle">Social Discussions</h2>
-                -->                
+                <!--
+                <h2 class="subtitle">Hyper-Local Social Discussions</h2>
+                <!--<h2 class="subtitle">Social Discussions</h2>-->
             </div>
         </div>
         
@@ -48,11 +53,9 @@
              down the page -->
         <div id="navigation-outer">
             <div id="navigation-inner" class="wrapper">
-                <ul>
-                    <li id="nav-icon"></li>
-                    <li id="nav-categories">[current category]</li>
-                    <li id="nav-profile"></li>
-                </ul>
+                    <img id="nav-cat" src="./../img/categories_25x25.png" />
+                    <span id="nav-cur-cat">[Current Category]</span>
+                    <img id="nav-settings" src="./../img/settings_25x25.png" />
             </div>
         </div>
         
@@ -66,7 +69,25 @@
                      body-inner div just serves as a wrapper, managing the size and
                      floating of the content -->                
                 <div id="content-area"> 
-                    text
+                    
+                    <!-- container that dumps out window statistics:
+                         [height]x[width] [offset from top] -->
+                    <div id="window-stats"></div>
+                    
+                    <!-- login box -->
+                    <div id="login">
+                        <form id="login-form">
+                            <span id="login-form-title">Welcome to PoWoW:</span>
+                            <br />
+                            <input id="login-form-username" type="text" value="username" />
+                            <br />
+                            <input id="login-form-password" type="password" value="password" />
+                            <br />
+                            <input id="login-form-submit" type="submit" value="Login"/>
+                            <input id="login-form-register" type="submit" value="Join" />
+                        </form>
+                    </div>
+                    
                 </div>                
             </div>
         </div>
