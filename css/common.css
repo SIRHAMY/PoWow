@@ -151,19 +151,22 @@ html, body {
 }
 
 .post-metadata {
-    /*background-color: #0000FF;*/
     font-size: 10px;
     padding: 2px;
 }
 
 .post-pinned {
-    /*background-color: #FF0000;*/
+    background-image: url("./../img/pin-grey_25x25.png");
+    display: inline-block;
     height: 25px;
     width: 25px;
 }
 
+.post-pinned:hover {
+    background-image: url("./../img/pin-orange_25x25.png");
+}
+
 .post-title {
-    /*background-color: #00FF00;*/
     display: inline-block;
     margin: 5px;
 }
@@ -176,7 +179,6 @@ html, body {
 }
  
 .subtitle {
-    /*background-color: #0000FF;*/
     display: block;
     float: left;
 }
@@ -198,12 +200,12 @@ html, body {
  * --------------------*/
 
 #body-inner {
-    background-color: #C9C0A3/*#C9C0A3/*F1EBDF*/;
+    background-color: #C9C0A3;
     padding: 10px;
 }
  
 #body-outer {
-    background-color: #A1997E;/*#4B4E50;#403F3D*/
+    background-color: #A1997E;
     position: relative;
 }
 
@@ -298,7 +300,6 @@ html, body {
 }
 
 #posts {
-    /*background-color: #FF0000;*/
 }
 
 #nav-cat {
@@ -343,7 +344,6 @@ html, body {
 }
 
 #title {
-    /*background-color: #FF00FF;*/
     color: #FFFFFF;
     display: block;
     float: left;
@@ -356,4 +356,3 @@ html, body {
     font-size: 20px;
     color: #000000;
 }
-

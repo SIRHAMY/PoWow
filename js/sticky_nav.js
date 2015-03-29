@@ -21,7 +21,6 @@ function stickyNav(){
     var headerHeight = $("#header-outer").height();
     var curYPos = $(window).scrollTop();
     if(curYPos > headerHeight){
-        console.log("adding sticky class...");
         $("#navigation-outer").addClass("sticky");
     }//end if
     else{
