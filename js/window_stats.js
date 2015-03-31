@@ -7,21 +7,17 @@
  */
  
 $(document).ready(function(){
-    updateWindowStats();
+    updateWindowStats();    
+    $(window).scroll(updateWindowStats);
+    $(window).resize(updateWindowStats);    
 });
 
-$(window).scroll(function(){
-    updateWindowStats();
-});
 
-$(window).resize(function(){
-    updateWindowStats();
-});
 
 function updateWindowStats(){
     var height = $(window).height();
     var width = $(window).width();
     var yscroll = $(window).scrollTop();
-    var stats = height + "x" + width + " " + yscroll;
+    var stats = height + "x" + width + ":" + yscroll;
     $("#window-stats").html(stats);
 }//end function

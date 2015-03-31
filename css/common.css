@@ -132,6 +132,11 @@ html, body {
  * Classes
  * --------------------*/
 
+ .nav-selected {
+    background-color: #3F3F41;
+    
+ }
+ 
 .post {
     border-style: solid;
     border-bottom-width: 2px;
@@ -209,6 +214,11 @@ html, body {
     position: relative;
 }
 
+#categories {
+    background-color: #3F3F41;
+    height: 25px;
+}
+
 #content-area {
     background-color: #F1EBDF;
     color: #3F3F41;
@@ -237,6 +247,15 @@ html, body {
     max-height: 150px;
     min-height: 50px;
     position: relative;
+}
+
+#javascript-disabled {
+    background-color: #FF0000;
+    color: #FFFFFF;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 5px;
 }
 
 #login {
@@ -303,29 +322,33 @@ html, body {
 }
 
 #nav-cat {
-    height: 20px;
+    height: 25px;
     position: absolute;
     left: 5px;
-    width: 20px;
+    width: 25px;
 }
 
 #nav-cur-cat {
     color: #FFFFFF;
+    display: block;
     font-size: 18px;
+    padding-top: 2px;
 }
 
 #nav-pinned {
-    height: 20px;
+    height: 25px;
     position: absolute;
     right: 40px;
-    width: 20px;
+    top: 0px;
+    width: 25px;
 }
 
 #nav-settings {
-    height: 20px;
+    height: 25px;
     position: absolute;
     right: 5px;
-    width: 20px;
+    top: 0px;
+    width: 25px;
 }
 
 #navigation-inner {
@@ -333,7 +356,7 @@ html, body {
     clear: both;
     height: 100%;
     text-align: center;
-    padding: 2px;
+    padding: 0px;
 }
 
 #navigation-outer {
@@ -351,8 +374,13 @@ html, body {
 }
 
 #window-stats {
-    background-color: #FFFF00;
+    background-color: #FFFFFF;
     text-align: center;
     font-size: 20px;
     color: #000000;
+    padding: 5px;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    z-index: 100;
 }

@@ -9,21 +9,24 @@
  * author:  Brendan McGarry
  */
 
-$(document).ready(function(){
-    stickyNav();
-});
-
-$(window).scroll(function(){
-    stickyNav();
+$(document).ready(function(){    
+    stickyNav();    
+    $(window).scroll(stickyNav);    
 });
 
 function stickyNav(){
+    debugln("BEGIN stickyNav");
     var headerHeight = $("#header-outer").height();
+    debugln("  headerHeight: [" + headerHeight + "]");
     var curYPos = $(window).scrollTop();
+    debugln("  curYPos: [" + curYPos + "]");
     if(curYPos > headerHeight){
+        debugln("  sticky");
         $("#navigation-outer").addClass("sticky");
     }//end if
     else{
+        debugln("  nonstick");
         $("#navigation-outer").removeClass("sticky");
     }//end else
+    debugln("END stickyNav");
 }//end function
