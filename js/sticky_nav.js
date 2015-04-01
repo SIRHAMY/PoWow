@@ -22,11 +22,11 @@ function stickyNav(){
     debugln("  curYPos: [" + curYPos + "]");
     if(curYPos > headerHeight){
         debugln("  sticky");
-        $("#navigation-outer").addClass("sticky");
+        $("#navigation-outer").addClass("sticky-nav");
     }//end if
     else{
         debugln("  nonstick");
-        $("#navigation-outer").removeClass("sticky");
+        $("#navigation-outer").removeClass("sticky-nav");
     }//end else
     debugln("END stickyNav");
 }//end function

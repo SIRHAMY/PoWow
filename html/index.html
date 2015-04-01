@@ -78,18 +78,49 @@
                 <script type="text/javascript">
                     $(document).ready(function(){
                         $("#nav-cat").click(function(){
-                            $("#test0").toggle();
+                            $("#dropdown-cat").toggle(250);
+                        });
+                        $("#nav-pinned").click(function(){
+                            $("#dropdown-pin").toggle(250);
+                        });
+                        $("#nav-settings").click(function(){
+                            $("#dropdown-settings").toggle(250);
                         });
                     });
                 </script>
                 
-                <div id="test0" class="test1">
-                    <div class="test2"></div>
-                    <div class="test2"></div>
-                    <div class="test2"></div>
-                    <div class="test2"></div>
-                    <div class="test2"></div>
-                    <div class="clear"></div>
+                <!-- drop down menus that are activated when nav items are
+                     clicked -->
+                <div id="dropdown">
+                    
+                    <!-- category selector dropdown -->
+                    <div id="dropdown-cat">
+                        <div class="test2"></div>
+                        <div class="test2"></div>
+                        <div class="test2"></div>
+                        <div class="test2"></div>
+                        <div class="test2"></div>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <!-- pin activity/notifications dropdown -->
+                    <div id="dropdown-pin">
+                        <div class="test3"></div>
+                        <div class="test3"></div>
+                        <div class="test3"></div>
+                        <div class="test3"></div>
+                        <div class="test3"></div>
+                    </div>
+                    
+                    <!-- settings/profile drop down -->
+                    <div id="dropdown-settings">
+                        <div class="test4"></div>
+                        <div class="test4"></div>
+                        <div class="test4"></div>
+                        <div class="test4"></div>
+                        <div class="test4"></div>
+                    </div>
+                    
                 </div>
                 
                 <!-- content area actually holds all of the information, whereas the
