@@ -7,16 +7,45 @@
  */
  
 $(document).ready(function(){
-    $("#nav-cat").click(toggleBackground);
+    /*$("#nav-cat").click(toggleBackground);
     $("#nav-pinned").click(toggleBackground);
-    $("#nav-settings").click(toggleBackground);
+    $("#nav-settings").click(toggleBackground);*/
+    $("#nav-cat").click(handleClick);
+    $("#nav-pinned").click(handleClick);
+    $("#nav-settings").click(handleClick);
 });
 
-function toggleBackground(event){
-    debugln("BEGIN toggleBackground");;
+function handleClick(event){
+    debugln("BEGIN handleClick");
     var clickedID = event.target.id;
     debugln("  clickedID: [" + clickedID + "]");
-    $(this).toggleClass("nav-selected");
-    debugln("  toggled.");
-    debugln("END toggleBackground");
+    toggleBackground(clickedID);
+    toggleDropdown(clickedID);
+    debugln("END handleClick");
+}//end function
+
+function toggleBackground(id){
+    debugln("  BEGIN toggleBackground");;
+    var clickedID = event.target.id;
+    debugln("    clickedID: [" + clickedID + "]");
+    $("#" + id).toggleClass("nav-selected");
+    debugln("    toggled");
+    debugln("  END toggleBackground");
+}//end function
+
+function toggleDropdown(id){
+    debugln("  BEGIN toggleDropdown");
+    if("nav-cat" === id){
+        debugln("    category");
+        $("#dropdown-cat").toggle(250);
+    }//end if
+    else if("nav-pinned" === id){
+        debugln("    pinned");
+        $("#dropdown-pinned").toggle(250);
+    }//end else if
+    else if("nav-settings" === id){
+        debugln("    settings");
+        $("#dropdown-settings").toggle(250);
+    }//end else if
+    debugln("  END toggleDropdown");
 }//end function

@@ -31,6 +31,7 @@
         <script type="text/javascript" src="./../js/debug.js"></script>
         <script type="text/javascript" src="./../js/nav_clicked.js"></script>
         <script type="text/javascript" src="./../js/sticky_nav.js"></script>
+        <script type="text/javascript" src="./../js/sticky_dropdown.js"></script>
         <script type="text/javascript" src="./../js/window_stats.js"></script>        
         <!-- page specific JS -->
         <!-- -->
@@ -75,20 +76,6 @@
         <div id="body-outer">
             <div id="body-inner" class="wrapper">
                 
-                <script type="text/javascript">
-                    $(document).ready(function(){
-                        $("#nav-cat").click(function(){
-                            $("#dropdown-cat").toggle(250);
-                        });
-                        $("#nav-pinned").click(function(){
-                            $("#dropdown-pin").toggle(250);
-                        });
-                        $("#nav-settings").click(function(){
-                            $("#dropdown-settings").toggle(250);
-                        });
-                    });
-                </script>
-                
                 <!-- drop down menus that are activated when nav items are
                      clicked -->
                 <div id="dropdown">
@@ -104,7 +91,7 @@
                     </div>
                     
                     <!-- pin activity/notifications dropdown -->
-                    <div id="dropdown-pin">
+                    <div id="dropdown-pinned" class="dropdown-block-right">
                         <div class="test3"></div>
                         <div class="test3"></div>
                         <div class="test3"></div>
@@ -113,7 +100,7 @@
                     </div>
                     
                     <!-- settings/profile drop down -->
-                    <div id="dropdown-settings">
+                    <div id="dropdown-settings" class="dropdown-block-right">
                         <div class="test4"></div>
                         <div class="test4"></div>
                         <div class="test4"></div>
