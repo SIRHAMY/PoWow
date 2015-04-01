@@ -9,13 +9,13 @@
 <!DOCTYPE html>
 <html lang="en-US">
     <head>
-        <meta charset="UTF-8">
+        <meta charset="UTF-8" />
         <!-- page slogan/subtitle -->
-        <meta name="description" content="hyper-local social discussions">
+        <meta name="description" content="hyper-local social discussions" />
         <!-- TODO(ALL): think of some keywords for SEO? -->
-        <meta name="keywords" content="forum,Q&A,local">
-        <meta name="author" content="Brendan McGarry">
-        <meta name="author" content="Hamilton Greene">
+        <meta name="keywords" content="forum,Q&A,local" />
+        <meta name="author" content="Brendan McGarry" />
+        <meta name="author" content="Hamilton Greene" />
         <!-- page slogan/subtitle
              NOTE(ALL): make sure the slogan matches the 'description' meta
                         tag above -->
@@ -23,7 +23,7 @@
             PoWow: Hyper-Local Social Discussions
         </title>
         <!-- global CSS -->
-        <link rel="stylesheet" type="text/css" href="./../css/common.css">
+        <link rel="stylesheet" type="text/css" href="./../css/common.css" />
         <!-- page specific CSS -->
         <!-- -->
         <!-- global JS -->
@@ -40,16 +40,16 @@
         <!-- container that dumps out window statistics:
              [height]x[width] [offset from top] -->
         <div id="window-stats"></div>
-    
+        
         <!-- outer header wrapper:
                used to set header height, bg color -->
         <div id="header-outer">
-            <div id="header-inner" class="wrapper">
-                
+            <div id="header-inner" class="wrapper">                
                 <img id="logo" align="left" src="./../img/logo_150x150.png" />
                 <h1 id="title">
                     PoWow
                 </h1>
+                <div class="clear"></div>
                 <!--
                 <h2 class="subtitle">Hyper-Local Social Discussions</h2>
                 <!--<h2 class="subtitle">Social Discussions</h2>-->
@@ -58,25 +58,50 @@
         
         <!-- navigation bar.  this object is sticky and will follow the user
              down the page -->
+        
         <div id="navigation-outer">
             <div id="navigation-inner" class="wrapper">
-                    <img id="nav-cat" src="./../img/categories_25x25.png" />
-                    <span id="nav-cur-cat">[Current Category]</span>
-                    <img id="nav-pinned" src="./../img/pin-white_25x25.png" />
-                    <img id="nav-settings" src="./../img/settings_25x25.png" />
+                <img id="nav-cat" class="nav-icon" src="./../img/categories_25x25.png" />
+                <span id="nav-cur-cat">[Current Category]</span>
+                <img id="nav-settings" class="nav-icon" src="./../img/settings_25x25.png" />
+                <img id="nav-pinned" class="nav-icon" src="./../img/pin-white_25x25.png" />
+                <div class="clear"></div>
             </div>
         </div>
+        
         
         <!-- outer body wrapper:
                used to set body section height, bg color -->
         <div id="body-outer">
-            <!-- inner body class, used to serve as a wrapper for content -->
             <div id="body-inner" class="wrapper">
+                
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $("#nav-cat").click(function(){
+                            $("#test0").toggle();
+                        });
+                    });
+                </script>
+                
+                <div id="test0" class="test1">
+                    <div class="test2"></div>
+                    <div class="test2"></div>
+                    <div class="test2"></div>
+                    <div class="test2"></div>
+                    <div class="test2"></div>
+                    <div class="clear"></div>
+                </div>
                 
                 <!-- content area actually holds all of the information, whereas the
                      body-inner div just serves as a wrapper, managing the size and
-                     floating of the content -->                
-                <div id="content-area"> 
+                     floating of the content -->
+                <div id="content-area">
+                    
+                    <!-- main UI HUD button -->
+                    <div id="button">
+                        <!-- "ask a question" button -->
+                        <div id="ask"></div>
+                    </div>
                     
                     <!-- JavaScript is disabled
                          TODO(ALL): how should we handle this? do we need to 
@@ -105,16 +130,13 @@
                         </form>
                     </div>
                     
+                    
                     <!-- list of posts we pulled to show the user -->
                     <div id="posts">
                     
-                        <!-- single question instance that was posted -->
                         <div class="post">
-                            <!-- "pin this question" button -->
                             <div class="post-pinned"></div>
-                            <!-- question title -->
                             What is a good place for late-night munchies?
-                            <!-- statistics/metadata about the question -->
                             <div class="post-metadata">
                                 asked by: 420_BlazeBro in Food 256 answers 4 pins 
                             </div>
@@ -153,12 +175,13 @@
                         </div>
                         
                     </div>
-                </div>                
+                    
+                </div>
+                
             </div>
         </div>
         <!-- outer footer wrapper:
                used to set footer height, bg color -->
-        
         <div id="footer-outer">
             <div id="footer-inner" class="wrapper">
                 &#169; Brendan McGarry and Hamilton Greene 2015. 
