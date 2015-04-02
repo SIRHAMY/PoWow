@@ -1,0 +1,105 @@
+/**
+ * This style sheet is responsible for the look-and-feel of all the content
+ * for index.html 
+ *
+ * created: 04/01/2015
+ * author:  Brendan McGarry
+ */
+
+/**--------------------
+ * Classes
+ * --------------------*/
+ 
+.post {
+    border-style: solid;
+    border-bottom-width: 2px;
+    border-left-width: 10px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-color: #A19378;
+    font-size: 20px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding: 3px;
+    width: 100%;
+}
+
+.post:hover {
+    border-color: #E08036;
+}
+
+.post-metadata {
+    font-size: 10px;
+    padding: 2px;
+}
+
+.post-pinned {
+    background-image: url("./../img/pin-grey_25x25.png");
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+}
+
+.post-pinned:hover {
+    background-image: url("./../img/pin-orange_25x25.png");
+}
+
+.post-title {
+    display: inline-block;
+    margin: 5px;
+}
+
+/**--------------------
+ * IDs
+ * --------------------*/
+
+#login {
+    background-color: #CFCFCF;
+    border-style: solid;
+    border-color: #A19378;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    position: relative;
+    width: 285px;
+}
+
+#login-close {
+    color: #6C6D70;
+    font-weight: bold;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+#login-form {
+    padding: 10px;
+}
+
+#login-form > input {
+    margin: 2px;
+    padding: 2px;
+}
+
+#login-form-password {
+    width: 200px;
+}
+
+#login-form-register {
+}
+
+#login-form-submit {
+}
+
+#login-form-title {
+    display: block;
+    font-size: 20px;
+}
+
+#login-form-username {
+    width: 200px;
+}
+
+#posts {
+} 

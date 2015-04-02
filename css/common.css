@@ -1,8 +1,8 @@
 /**
- Styles that are common to ALL pages
- 
- created: 03/22/2015
- author:  Brendan McGarry
+ * Styles that are common to ALL pages
+ * 
+ * created: 03/22/2015
+ * author:  Brendan McGarry
  */
 
 /* NOTE(ALL): figure out what the lowest screen resolution we'll support
@@ -128,7 +128,7 @@ html, body{
 
 /**--------------------
  * Classes
- * --------------------*/
+ * --------------------*/ 
 
 .test2 {
     background-color: #FF0000;
@@ -149,7 +149,7 @@ html, body{
     background-color: #0000FF;
     height: 25px;
     margin-bottom: 3px;
-}  
+} 
  
 .clear {
     clear: both;
@@ -169,45 +169,6 @@ html, body{
  
 .nav-selected {
     background-color: #3F3F41;
-}
- 
-.post {
-    border-style: solid;
-    border-bottom-width: 2px;
-    border-left-width: 10px;
-    border-right-width: 2px;
-    border-top-width: 2px;
-    border-color: #A19378;
-    font-size: 20px;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    padding: 3px;
-    width: 100%;
-}
-
-.post:hover {
-    border-color: #E08036;
-}
-
-.post-metadata {
-    font-size: 10px;
-    padding: 2px;
-}
-
-.post-pinned {
-    background-image: url("./../img/pin-grey_25x25.png");
-    display: inline-block;
-    height: 25px;
-    width: 25px;
-}
-
-.post-pinned:hover {
-    background-image: url("./../img/pin-orange_25x25.png");
-}
-
-.post-title {
-    display: inline-block;
-    margin: 5px;
 }
 
 .sticky-dropdown-left {
@@ -253,9 +214,8 @@ html, body{
 #ask {
     background-image: url("./../img/ask_50x50.png");
     height: 50px;
-    width: 50px;
-    z-index: 100;
-} 
+    width: 50px;    
+}
  
 #body-inner {
     background-color: #C9C0A3;
@@ -267,9 +227,10 @@ html, body{
 }
 
 #button {
-    bottom: 15px;
     position: absolute;
-    right: 15px;
+    left: 260px;
+    top: 420px;
+    z-index: 100;
 }
 
 #categories {
@@ -345,54 +306,6 @@ html, body{
     padding: 5px;
 }
 
-#login {
-    background-color: #CFCFCF;
-    border-style: solid;
-    border-color: #A19378;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 5px;
-    position: relative;
-    width: 285px;
-}
-
-#login-close {
-    color: #6C6D70;
-    font-weight: bold;
-    position: absolute;
-    top: 5px;
-    right: 5px;
-}
-
-#login-form {
-    padding: 10px;
-}
-
-#login-form > input {
-    margin: 2px;
-    padding: 2px;
-}
-
-#login-form-password {
-    width: 200px;
-}
-
-#login-form-register {
-}
-
-#login-form-submit {
-}
-
-#login-form-title {
-    display: block;
-    font-size: 20px;
-}
-
-#login-form-username {
-    width: 200px;
-}
-
 #logo {
     /* NOTE(ALL): make sure this conforms to outer-header's max height as
                   well as the image file itself */
@@ -425,9 +338,6 @@ html, body{
 
 #navigation-outer {
     background-color: #6C6D70;
-}
-
-#posts {
 }
 
 #title {
