@@ -73,7 +73,7 @@
         <!-- main UI HUD button -->
         <div id="button">
             <!-- "ask a question" button -->
-            <div id="ask"></div>
+            <div id="button-ask"></div>
         </div>
         
         <!-- outer body wrapper:
@@ -145,6 +145,20 @@
                         </form>
                     </div>
                     
+                    <!-- "ask a question" form -->
+                    <div id="ask">
+                        <form id="ask-form">
+                            <span id="ask-form-title">Ask A Question:</span>
+                            <br />
+                            Question: <input id="ask-form-question" type="text" />
+                            <br />
+                            More information:
+                            <br />
+                            <textarea id="ask-form-more">                            
+                            </textarea>
+                            <input id="ask-form-submit" type="submit" value="Post" />
+                        </form>
+                    </div>
                     
                     <!-- list of posts we pulled to show the user -->
                     <div id="posts">

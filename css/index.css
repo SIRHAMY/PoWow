@@ -53,6 +53,44 @@
  * IDs
  * --------------------*/
 
+#ask {
+    background-color: #CFCFCF;
+    border-style: solid;
+    border-color: #A19378;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    position: relative;
+    width: 285px;
+}
+
+#ask-form {
+    padding: 10px;
+}
+
+#ask-form > input {
+    margin: 2px;
+    padding: 2px;
+}
+
+#ask-form-question {
+    width: 250px;
+}
+
+#ask-form-more {
+    height: 100px;
+    resize: none;
+    width: 250px;
+}
+
+#ask-form-submit {
+}
+
+#ask-form-title {
+    font-size: 30px;
+}
+
 #login {
     background-color: #CFCFCF;
     border-style: solid;
