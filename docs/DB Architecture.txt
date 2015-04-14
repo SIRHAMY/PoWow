@@ -1,0 +1,38 @@
+**PoWow Documentation**
+======================
+
+DB Architecture - MySQL
+------------------------
+
+Tables
+-------
+- user_info
+user_id – VARCHAR(10) – (PK, NN) 
+user_pass – VARCHAR(12)
+
+- question_info
+question_id – INT(11) – (PK, NN, AI)
+asker_id – VARCHAR(10)
+question_text-VARCHAR(100)
+question_description – VARCHAR(100)
+question_latitude – FLOAT(7,3)
+question_longitude – FLOAT(7,3)
+question_votes – INT(11)
+last_action – TIMESTAMP
+
+- response_info
+orig_question – INT(11) – (NN)
+response_id – INT(11) – (PK, NN, AI)
+orig_response – INT(11)
+response_text – VARCHAR(100)
+response_votes – INT(11)
+
+- pinned_questions
+user_id – VARCHAR(10) – (PK, NN)
+question_id – INT(11) – (PK, NN)
+last_looked – TIMESTAMP
+
+- vote_count
+user_id – VARCHAR(10) – (PK, NN)
+response_id – INT(11) – (PK, NN)
+vote – INT(11)
