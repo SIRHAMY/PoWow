@@ -12,7 +12,8 @@ user_pass – VARCHAR(12)
 
 - question_info
 question_id – INT(11) – (PK, NN, AI)
-asker_id – VARCHAR(10)
+asker_id – VARCHAR(10) - (NN)
+question_category - VARCHAR(45) - (NN)
 question_text-VARCHAR(100)
 question_description – VARCHAR(100)
 question_latitude – FLOAT(7,3)
@@ -21,8 +22,9 @@ question_votes – INT(11)
 last_action – TIMESTAMP
 
 - response_info
-orig_question – INT(11) – (NN)
 response_id – INT(11) – (PK, NN, AI)
+responder_id - VARCHAR(10) - (NN)
+orig_question – INT(11) – (NN)
 orig_response – INT(11)
 response_text – VARCHAR(100)
 response_votes – INT(11)

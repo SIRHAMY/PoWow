@@ -5,13 +5,14 @@
 //Much of this is ripped from W3Schools - We'll see how it works then customize to fit our needs
 
 //Need to fill these out with correct info for DB instance
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "myDB";
+$servername = "powow.cxecv0lwxvps.us-east-1.rds.amazonaws.com";
+$username = "powowmaster";
+$password = "MRmaster117";
+$dbname = "mydb";
+$portnum = 3306;
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$conn = new mysqli($servername, $username, $password, $dbname, $portnum);
 
 // Check connection
 if ($conn->connect_error) {
@@ -19,7 +20,7 @@ if ($conn->connect_error) {
 } 
 
 //Fill out with actual SQL statement
-$sql = "SELECT * FROM Questions";
+$sql = "SELECT * FROM question_info";
 $result = $conn->query($sql);
 
 //Check if there are results
