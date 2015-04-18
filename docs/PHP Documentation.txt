@@ -1,0 +1,10 @@
+PoWow PHP Documentation
+Author: Hamilton Greene
+
+PHP Files
+---------
+
+getAllQuestions.php
+===================
+Runs query that returns all questions from DB in JSON Format
+
