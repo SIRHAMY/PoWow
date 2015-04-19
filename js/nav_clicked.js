@@ -17,17 +17,21 @@ $(document).ready(function(){
 
 function handleClick(event){
     debugln("BEGIN handleClick");
-    debugln("  unclicking all menu items...");
-    $("#nav-cat").removeClass("nav-selected");
-    $("#nav-settings").removeClass("nav-selected");
-    $("#nav-pinned").removeClass("nav-selected");
-    debugln("  hiding all dropdowns...");
-    $("#dropdown-cat").hide();
-    $("#dropdown-pinned").hide();
-    $("#dropdown-settings").hide();
-    debugln("  done.");
     var clickedID = event.target.id;
     debugln("  clickedID: [" + clickedID + "]");
+    debugln("  unclicking all menu items...");
+    if(clickedID != "nav-cat"){
+        $("#nav-cat").removeClass("nav-selected");
+        $("#dropdown-cat").hide();
+    }//end if
+    if(clickedID != "nav-settings"){
+        $("#nav-settings").removeClass("nav-selected");
+        $("#dropdown-settings").hide();
+    }//end if
+    if(clickedID != "nav-pinned"){
+        $("#nav-pinned").removeClass("nav-selected");
+        $("#dropdown-pinned").hide();
+    }//end if    
     debugln("  toggling background...");
     toggleBackground(clickedID);
     debugln("  toggling dropdown...");
