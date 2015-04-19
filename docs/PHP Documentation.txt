@@ -8,3 +8,36 @@ getAllQuestions.php
 ===================
 Runs query that returns all questions from DB in JSON Format
 
+getCatQuestions.php
+===================
+Returns questions in chosen category from DB (default number is 5)
+
+Place params in URL as BASEURL/getCatQuestion.php?qCategory=INSERTCATNAMEHERE
+
+Params
+qCategory=[Input Desired Category as listed in DB Architecture]
+qLongitude //Place holders for later geographic algorithm implementation
+qLatitude
+
+pushQuestion.php
+================
+Pushes a question to the DB.  I think all of these parameters have to be included in the URL for the file not to crash, so if you don't want to use one just put NULL in it -> also assuming the DB will know that "NULL" is NULL and not "NULL"
+
+Params
+askerID - The asker's unique ID
+qCategory - The category you want the question to be posted under
+qText - The title of the question
+qDescription - Any additional text for the question
+qLat - question's asking latitude
+qLong - Question's asking longitude
+
+$askerID', '$qCategory', '$qText', '$qDescription', '$qLat', '$qLong'
+
+pushUser.php
+============
+Pushes a new user to the DB.  Not sure what happens if there are duplicates.
+
+Params
+userID - The user's desired ID
+userPass - The desired password
+

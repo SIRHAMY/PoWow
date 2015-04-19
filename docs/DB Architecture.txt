@@ -38,3 +38,17 @@ last_looked – TIMESTAMP
 user_id – VARCHAR(10) – (PK, NN)
 response_id – INT(11) – (PK, NN)
 vote – INT(11)
+
+
+Column Specifics
+----------------
+
+Question Categories
+===================
+
+Category Name - Stored in DB AS
+Entertainment/Media - media
+Events/Places - events\
+Food - food
+Shopping - shopping
+Technology - tech
