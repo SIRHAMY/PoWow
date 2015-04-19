@@ -26,14 +26,14 @@
 }
 
 .comment-downvote {
-    background-image: url("./../img/downvote-grey_25x25.png");
+    background-image: url("./../img/downvote-grey_15x15.png");
     display: inline-block;
-    height: 25px;
-    width: 25px;
+    height: 15px;
+    width: 15px;
 }
 
 .comment-downvote:hover {
-    background-image: url("./../img/downvote-orange_25x25.png");
+    background-image: url("./../img/downvote-orange_15x15.png");
 }
 
 .comment-metadata {
@@ -42,14 +42,14 @@
 }
 
 .comment-upvote {
-    background-image: url("./../img/upvote-grey_25x25.png");
+    background-image: url("./../img/upvote-grey_15x15.png");
     display: inline-block;
-    height: 25px;
-    width: 25px;
+    height: 15px;
+    width: 15px;
 }
 
 .comment-upvote:hover {
-    background-image: url("./../img/upvote-green_25x25.png");
+    background-image: url("./../img/upvote-green_15x15.png");
 }
 
 .post {
@@ -197,6 +197,7 @@
 }
 
 #post-question{
+    background-color: #F1EBDF;
     padding: 5px;
     margin-bottom: 10px;
 }
@@ -222,6 +223,7 @@
 
 #post-question-title{
     background-color: #F1EBDF;
+    display: inline;
     font-size: 25px;
     padding: 3px;
 }
