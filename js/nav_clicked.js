@@ -17,9 +17,20 @@ $(document).ready(function(){
 
 function handleClick(event){
     debugln("BEGIN handleClick");
+    debugln("  unclicking all menu items...");
+    $("#nav-cat").removeClass("nav-selected");
+    $("#nav-settings").removeClass("nav-selected");
+    $("#nav-pinned").removeClass("nav-selected");
+    debugln("  hiding all dropdowns...");
+    $("#dropdown-cat").hide();
+    $("#dropdown-pinned").hide();
+    $("#dropdown-settings").hide();
+    debugln("  done.");
     var clickedID = event.target.id;
     debugln("  clickedID: [" + clickedID + "]");
+    debugln("  toggling background...");
     toggleBackground(clickedID);
+    debugln("  toggling dropdown...");
     toggleDropdown(clickedID);
     debugln("END handleClick");
 }//end function
