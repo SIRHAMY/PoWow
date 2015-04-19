@@ -37,6 +37,7 @@
  * #A19378   Dark Brown
  * #878068   Brown Grey
  * #E08036   Orange
+ * #89E894   Green
  */
 
 /**--------------------
@@ -129,27 +130,6 @@ html, body{
 /**--------------------
  * Classes
  * --------------------*/ 
-
-.test2 {
-    background-color: #FF0000;
-    float: left;
-    height: 25px;
-    margin-left: 3px;
-    margin-right: 3px;
-    width: 25px;
-}
-
-.test3 {
-    background-color: #00FF00;
-    height: 25px;
-    margin-bottom: 3px;
-}
-
-.test4 {
-    background-color: #0000FF;
-    height: 25px;
-    margin-bottom: 3px;
-} 
  
 .clear {
     clear: both;
@@ -160,6 +140,29 @@ html, body{
     right: 0px;
     top: 0px;
 }
+
+.dropdown-cat-item {
+    background-color: #FF0000;
+    float: left;
+    height: 25px;
+    margin-left: 3px;
+    margin-right: 3px;
+    width: 25px;
+}
+
+.dropdown-pinned-item {
+    background-color: #00FF00;
+    height: 25px;
+    margin-bottom: 3px;
+}
+
+.dropdown-settings-item {
+    /*background-color: #0000FF;*/
+    color: #FFFFFF;
+    height: 25px;
+    padding: 2px;
+    margin: 2px;
+} 
  
 .nav-icon {
     display: block;
@@ -231,6 +234,13 @@ html, body{
     background-image: url("./../img/ask_50x50.png");
     height: 50px;
     width: 50px;    
+}
+
+#button-cancel {
+    background-image: url("./../img/cancel_50x50.png");
+    height: 50px;
+    width: 50px;
+    display: none;
 }
 
 #categories {

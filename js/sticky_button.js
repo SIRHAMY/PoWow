@@ -1,5 +1,6 @@
 /**
- * This JavaScript makes the 
+ * This JavaScript makes the HUD button in the bottom right corner of the page
+ * follow the user down the page
  *
  * created: 04/01/2015
  * author:  Brendan McGarry
@@ -31,14 +32,8 @@ function stickyButton(){
     //  the button will cross into the footer, we don't update the position.
     var x;
     var y;
-    if(totalHeight <= footerPos.top){
-        y = (totalHeight - offset) - buttonLength;
-        x = (width - offset) - buttonLength;
-    }//end if
-    else{
-        y = (footerPos.top - offset) - buttonLength;
-        x = (width - offset) - buttonLength;        
-    }//end else
+    y = (totalHeight - offset) - buttonLength;
+    x = (width - offset) - buttonLength;
     debugln("  position: [" + x + ", " + y + "]");
     //set the location
     $("#button").css("top", y + "px");

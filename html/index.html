@@ -30,7 +30,12 @@
         <script type="text/javascript" src="./../js/lib/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src="./../js/debug.js"></script>
         <!-- page specific JS -->
+        <script type="text/javascript" src="./../js/button_clicked.js"></script>
+        <script type="text/javascript" src="./../js/category_clicked.js"></script>
+        <script type="text/javascript" src="./../js/dropdown_clicked.js"></script>
+        <script type="text/javascript" src="./../js/login_clicked.js"></script>
         <script type="text/javascript" src="./../js/nav_clicked.js"></script>
+        <script type="text/javascript" src="./../js/post_clicked.js"></script>
         <script type="text/javascript" src="./../js/sticky_button.js"></script>
         <script type="text/javascript" src="./../js/sticky_nav.js"></script>
         <script type="text/javascript" src="./../js/sticky_dropdown.js"></script>
@@ -74,6 +79,8 @@
         <div id="button">
             <!-- "ask a question" button -->
             <div id="button-ask"></div>
+            <!-- "cancel" button -->
+            <div id="button-cancel"></div>
         </div>
         
         <!-- outer body wrapper:
@@ -86,30 +93,30 @@
                 <div id="dropdown">
                     <!-- category selector dropdown -->
                     <div id="dropdown-cat">
-                        <div class="test2"></div>
-                        <div class="test2"></div>
-                        <div class="test2"></div>
-                        <div class="test2"></div>
-                        <div class="test2"></div>
+                        <!-- TODO(ALL): use AJAX to dynamically make categories -->
+                        <div class="dropdown-cat-item"></div>
+                        <div class="dropdown-cat-item"></div>
+                        <div class="dropdown-cat-item"></div>
+                        <div class="dropdown-cat-item"></div>
+                        <div class="dropdown-cat-item"></div>
                         <div class="clear"></div>
                     </div>
                     
                     <!-- pin activity/notifications dropdown -->
                     <div id="dropdown-pinned" class="dropdown-block-right">
-                        <div class="test3"></div>
-                        <div class="test3"></div>
-                        <div class="test3"></div>
-                        <div class="test3"></div>
-                        <div class="test3"></div>
+                        <!-- TODO(ALL): generating pinned stuff -->
+                        <div class="dropdown-pinned-item"></div>
+                        <div class="dropdown-pinned-item"></div>
+                        <div class="dropdown-pinned-item"></div>
+                        <div class="dropdown-pinned-item"></div>
+                        <div class="dropdown-pinned-item"></div>
                     </div>
                     
                     <!-- settings/profile drop down -->
                     <div id="dropdown-settings" class="dropdown-block-right">
-                        <div class="test4"></div>
-                        <div class="test4"></div>
-                        <div class="test4"></div>
-                        <div class="test4"></div>
-                        <div class="test4"></div>
+                        <div id="dropdown-settings-login" class="dropdown-settings-item">Login</div>
+                        <div id="dropdown-settings-profile" class="dropdown-settings-item">My Profile</div>
+                        <div id="dropdown-settings-slider" class="dropdown-settings-item">&lt;slider&gt;</div>
                     </div>
                 </div>
                 
@@ -129,6 +136,45 @@
                             Behavior and functionality may not be consistent.
                         </div>
                     </noscript>
+                    
+                    <!-- your profile -->
+                    <div id="profile">
+                        <span id="profile-title">Your Profile:</span>
+                        <br />
+                        <!-- Stats go here -->
+                        -- stats and info go here --
+                    </div>
+                    
+                    <!-- more details of a post -->
+                    <div id="post">
+                        <!-- post itself -->
+                        <div id="post-question">
+                            <!-- TODO(ALL): use AJAX to dynamically get this -->
+                            <div id="post-question-title">What is a good place for late-night munchies?</div>
+                            <div id="post-question-metadata" class="post-metadata">
+                                asked by: 420_BlazeBro in Food 256 answers 4 pins
+                            </div>
+                            <hr />
+                            <div id="post-question-more">
+                                I'm pretty hungry and need somewhere to grab a quick byte.  However, I'm not looking to spend more than $10.  Any suggestions?
+                            </div>
+                        </div>
+                        <!-- comment section -->
+                        <div id="post-comment-section">
+                            <!-- TODO(ALL): use AJAX to dynamically generate these -->
+                            <div id="post-comment-section-metadata" class="post-metadata">
+                                15 answers
+                            </div>
+                            <div class="comment">
+                                <div class="comment-upvote"></div>
+                                <div class="comment-downvote"></div>
+                                Delias is pretty good. They sell chicken sausage for pretty cheap!
+                                <div class="comment-metadata">
+                                    answered by: dan_3895 5 upvotes 1 downvote 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
                     <!-- login box -->
                     <div id="login">
@@ -150,12 +196,16 @@
                         <form id="ask-form">
                             <span id="ask-form-title">Ask A Question:</span>
                             <br />
-                            Question: <input id="ask-form-question" type="text" />
+                            Question: 
+                            <br />
+                            <!-- TODO(ALL): use AJAX to pull the categories, dynamically make
+                                              radio buttons -->
+                            <input id="ask-form-question" type="text" />
                             <br />
                             More information:
                             <br />
-                            <textarea id="ask-form-more">                            
-                            </textarea>
+                            <textarea id="ask-form-more"></textarea>
+                            <br />
                             <input id="ask-form-submit" type="submit" value="Post" />
                         </form>
                     </div>

@@ -5,11 +5,53 @@
  * created: 04/01/2015
  * author:  Brendan McGarry
  */
-
+ 
 /**--------------------
  * Classes
  * --------------------*/
- 
+
+.comment {
+    background-color: #F1EBDF;
+    border-style: solid;
+    border-bottom-width: 2px;
+    border-left-width: 10px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-color: #A19378;
+    font-size: 20px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    padding: 3px;
+    width: 100%;
+}
+
+.comment-downvote {
+    background-image: url("./../img/downvote-grey_25x25.png");
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+}
+
+.comment-downvote:hover {
+    background-image: url("./../img/downvote-orange_25x25.png");
+}
+
+.comment-metadata {
+    font-size: 10px;
+    padding: 2px;
+}
+
+.comment-upvote {
+    background-image: url("./../img/upvote-grey_25x25.png");
+    display: inline-block;
+    height: 25px;
+    width: 25px;
+}
+
+.comment-upvote:hover {
+    background-image: url("./../img/upvote-green_25x25.png");
+}
+
 .post {
     border-style: solid;
     border-bottom-width: 2px;
@@ -55,18 +97,23 @@
 
 #ask {
     background-color: #C9C0A3;
-    /*border-style: solid;
-    border-color: #A19378;*/
+    display: none;
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
     position: relative;
-    width: 285px;
 }
 
 #ask-form {
+    border-color: #F1EBDF;
+    border-style: solid;
+    border-width: 2px;
+    display: block;
     padding: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 280px;
 }
 
 #ask-form > input {
@@ -80,6 +127,7 @@
 
 #ask-form-more {
     height: 100px;
+    padding: 5px;
     resize: none;
     width: 250px;
 }
@@ -95,6 +143,7 @@
     background-color: #CFCFCF;
     border-style: solid;
     border-color: #A19378;
+    display: none;
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
@@ -139,5 +188,57 @@
     width: 200px;
 }
 
+#post{
+    background-color: #C9C0A3;
+    display: none;
+}
+
+#post-comment-section{
+}
+
+#post-question{
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+#post-question > hr {
+    background-color: #C9C0A3;
+    height: 5px;
+}
+
+#post-question-metadata {
+    background-color: #F1EBDF;
+    padding-bottom: 10px;
+}
+
+#post-question-more{
+    background-color: #F1EBDF;
+    color: #3F3F41;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+}
+
+#post-question-title{
+    background-color: #F1EBDF;
+    font-size: 25px;
+    padding: 3px;
+}
+
 #posts {
+}
+
+#profile {
+    background-color: #C9C0A3;
+    display: none;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    position: relative;
+}
+
+#profile-title{
+    font-size: 30px;
 } 
