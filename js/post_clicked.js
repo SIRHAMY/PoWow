@@ -14,6 +14,8 @@ function postClicked(event){
     $("#login").hide();
     $("#profile").hide();
     $("#ask").hide();
+    showPost(clickedId);
+    showComments(clickedId);
     $("#post").show(250);
     //TODO(ALL): use AJAX to load this data and comment section
     debugln("END postClicked");
