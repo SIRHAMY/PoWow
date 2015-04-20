@@ -30,6 +30,7 @@
         <script type="text/javascript" src="./../js/lib/jquery-2.1.3.min.js"></script>
         <script type="text/javascript" src="./../js/debug.js"></script>
         <!-- page specific JS -->
+        <script type="text/javascript" src="./../js/ajax.js"></script>
         <script type="text/javascript" src="./../js/button_clicked.js"></script>
         <script type="text/javascript" src="./../js/category_clicked.js"></script>
         <script type="text/javascript" src="./../js/dropdown_clicked.js"></script>
@@ -39,7 +40,7 @@
         <script type="text/javascript" src="./../js/sticky_button.js"></script>
         <script type="text/javascript" src="./../js/sticky_nav.js"></script>
         <script type="text/javascript" src="./../js/sticky_dropdown.js"></script>
-        <script type="text/javascript" src="./../js/window_stats.js"></script>  
+        <script type="text/javascript" src="./../js/window_stats.js"></script>
     </head>
     <body>
     
@@ -94,12 +95,14 @@
                     <!-- category selector dropdown -->
                     <div id="dropdown-cat">
                         <!-- TODO(ALL): use AJAX to dynamically make categories -->
+                        <!--
                         <div class="dropdown-cat-item"></div>
                         <div class="dropdown-cat-item"></div>
                         <div class="dropdown-cat-item"></div>
                         <div class="dropdown-cat-item"></div>
                         <div class="dropdown-cat-item"></div>
                         <div class="clear"></div>
+                        -->
                     </div>
                     
                     <!-- pin activity/notifications dropdown -->
@@ -136,6 +139,10 @@
                             Behavior and functionality may not be consistent.
                         </div>
                     </noscript>
+                    
+                    <!-- dump div for testing -->
+                    <div id="dump">
+                    </div>
                     
                     <!-- your profile -->
                     <div id="profile">
@@ -213,7 +220,7 @@
                     
                     <!-- list of posts we pulled to show the user -->
                     <div id="posts">
-                    
+                        <!--
                         <div class="post">
                             <div class="post-pinned"></div>
                             What is a good place for late-night munchies?
@@ -253,7 +260,7 @@
                                 asked by: bloop in Misc 29 answers 4 pins 
                             </div>
                         </div>
-                        
+                        -->
                     </div>
                     
                 </div>
