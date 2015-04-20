@@ -5,14 +5,6 @@
  * author:  Brendan McGarry
  */
 
-$(document).ready(function(){
-    $(".dropdown-cat-item").each(
-        function(){
-            $(this).click(categoryClicked);
-        }//end function
-    );
-});
-
 function categoryClicked(event){
     debugln("BEGIN categoryClicked");
     var clickedId = event.target.id;
@@ -28,8 +20,10 @@ function categoryClicked(event){
     debugln("  fixing HUD button...");
     $("#button-cancel").hide();
     $("#button-ask").show();
-    //TODO(ALL): do AJAX call to update posts based on category pulled
-    //           update the current category in nav bar (#nav-cur-cat)
+    debugln("  updating nav category display");
+    $("#nav-cur-cat").html(clickedId);
+    debugln("  generating posts...");
+    getPosts(clickedId);
     debugln("  showing posts");
     $("#posts").show(250);
     debugln("END categoryClicked");

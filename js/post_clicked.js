@@ -4,14 +4,6 @@
  * created: 04/18/2015
  * author:  Brendan McGarry
  */
- 
-$(document).ready(function(){
-    $(".post").each(
-        function(){
-            $(this).click(postClicked);
-        }//end function
-    );
-});
 
 function postClicked(event){
     debugln("BEGIN postClicked");

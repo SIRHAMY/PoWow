@@ -69,7 +69,7 @@
         <div id="navigation-outer">
             <div id="navigation-inner" class="wrapper">
                 <img id="nav-cat" class="nav-icon" src="./../img/categories_25x25.png" />
-                <span id="nav-cur-cat">[Current Category]</span>
+                <span id="nav-cur-cat">All</span>
                 <img id="nav-settings" class="nav-icon" src="./../img/settings_25x25.png" />
                 <img id="nav-pinned" class="nav-icon" src="./../img/pin-white_25x25.png" />
                 <div class="clear"></div>
@@ -202,15 +202,15 @@
                     <!-- "ask a question" form -->
                     <div id="ask">
                         <form id="ask-form">
-                            <span id="ask-form-title">Ask A Question:</span>
-                            <br />
-                            Question: 
-                            <br />
+                            <div id="ask-form-title">Ask A Question:</div>
                             <!-- TODO(ALL): use AJAX to pull the categories, dynamically make
                                               radio buttons -->
+                            <b>Category:</b>
+                            <div id="ask-form-cat"></div>
+                            <b>Question:</b>
                             <input id="ask-form-question" type="text" />
                             <br />
-                            More information:
+                            <b>More information:</b>
                             <br />
                             <textarea id="ask-form-more"></textarea>
                             <br />

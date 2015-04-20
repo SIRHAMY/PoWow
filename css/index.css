@@ -121,6 +121,10 @@
     padding: 2px;
 }
 
+#ask-form-cat {
+    margin: 5px;
+}
+
 #ask-form-question {
     width: 250px;
 }
@@ -137,6 +141,7 @@
 
 #ask-form-title {
     font-size: 30px;
+    margin-bottom: 5px;
 }
 
 #login {
