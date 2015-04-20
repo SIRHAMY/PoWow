@@ -8,6 +8,11 @@ getAllQuestions.php
 ===================
 Runs query that returns all questions from DB in JSON Format
 
+
+getCategories.php
+=================
+
+
 getCatQuestions.php
 ===================
 Returns questions in chosen category from DB (default number is 5)
@@ -19,9 +24,36 @@ qCategory=[Input Desired Category as listed in DB Architecture]
 qLongitude //Place holders for later geographic algorithm implementation
 qLatitude
 
+
+getPinnedQuestions.php
+======================
+Gets all entries in pinned questions table pinned by that user
+
+BASEURL/getPinnedQuestions.php?userID=ENTERUSERID
+
+
+getQuestion.php
+===============
+Returns the question data associated with the give ID
+
+BASEURL/getQuestion.php?qID=ENTERQUESTIONID
+
+
+getUser.php
+============
+Returns whether the given credentials match those currently in the database
+
+BASEURL/getUser.php?userID=ENTERUSERID&userPass=ENTERUSERPASS
+
+Will return 1 if there's a match, 0 if there isn't.
+
+
+
 pushQuestion.php
 ================
 Pushes a question to the DB.  I think all of these parameters have to be included in the URL for the file not to crash, so if you don't want to use one just put NULL in it -> also assuming the DB will know that "NULL" is NULL and not "NULL"
+
+BASEURL/pushQuestion.php?askerID=ENTERASKERID&qCategory=ENTERQUESTIONCATEGORY&qText=ENTERQUESTION&qDescription=ENTERADDITIONALINFO&qLat=ENTERQLATITUDE&qLong=ENTERQLONGITUDE
 
 Params
 askerID - The asker's unique ID
@@ -31,7 +63,8 @@ qDescription - Any additional text for the question
 qLat - question's asking latitude
 qLong - Question's asking longitude
 
-$askerID', '$qCategory', '$qText', '$qDescription', '$qLat', '$qLong'
+
+
 
 pushUser.php
 ============
