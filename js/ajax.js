@@ -1,9 +1,12 @@
 
-var USER_ID;
+var USER_ID = "Anonymous";
 
 $(document).ready(function(){
     getAllPosts();
     getCategories();
+    $("#login-form-submit").click(login);
+    //$("#login-form-register").click(register(event));
+    $("#ask-form-submit").click(postQuestion);
 });
 
 function getAllPosts(){
@@ -19,6 +22,7 @@ function getAllPosts(){
             $("#posts").empty();
             debugln("  adding posts...");
             $.each(json_data, function(key, val){
+                debugln("  " + key + "{" + val.question_id + ", " + val.question_text + ", " + val.question_category + "}");
                 $("#posts").append(
                     "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
                     "<div class=\"post-pinned\"></div>" + 
@@ -93,6 +97,88 @@ function getCategories(){
         }//end function
     });
     debugln("END getCategories");
+}//end function
+
+function login(event){
+    debugln("BEGIN login");
+    debugln("  getting user name...");
+    var userName = $("#login-form-username").val();
+    //alert("username: [" + username + "]");
+    debugln("  username: [" + userName + "]");
+    debugln("  getting password...");
+    var pass = $("#login-form-password").val();
+    //alert("password: [" + password + "]");
+    debugln("  password: [" + pass + "]");
+    debugln("  attempting to login...");
+    debugln("username: [" + userName + "]\npassword: [" + pass + "]");
+    $.ajax({
+        type: "GET",
+        url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/getUser.php",
+        data: {username: userName, password: pass}/*$("#login-form").serialize()*/,
+        dataType: 'JSON',
+        success: function(json_data){
+            debugln("login sent!");
+            debugln("  found [" + json_data.length + "]  object");
+            debugln("  adding new post...");
+            $.each(json_data, function(key, val){
+                debugln("  " + val.login);
+                if(val.login == "true"){
+                    USER_ID = userName;
+                    alert("LOGGED IN! :D");
+                }//end if
+                else{
+                    USER_ID = "Anonymous";
+                    alert("LOGIN FAILED! D:<");
+                }//end else
+            });
+        }//end function
+    });
+    debugln("END login");
+}//end function
+
+function postQuestion(event){
+    debugln("BEGIN postQuestion");
+    debugln("  getting user name...");
+    var userName = USER_ID;
+    debugln("  username: [" + userName + "]");
+    debugln("  getting category...");
+    var cat = $("form input[type='radio']:checked").val();
+    debugln("  category: [" + cat + "]");
+    debugln("  getting question title...");
+    var ques = $("#ask-form-question").val();
+    debugln("  password: [" + ques + "]");
+    debugln("  getting more info...");
+    var quesMore = $("#ask-form-more").val();
+    debugln("  more: [" + quesMore + "]");
+    debugln("  attempting to post question...");
+    alert("username: [" + userName + "]\ncategory: [" + cat + "]\nquestion: [" + ques + "]\nMore: [" + quesMore + "]");
+    $.ajax({
+        type: "GET",
+        url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushQuestion.php",
+        data: {askerID: userName, qCategory: cat, qText: ques, qDescription: quesMore},
+        dataType: 'JSON',
+        success: function(json_data){
+            alert("  question sent!");
+            debugln("  found [" + json_data.length + "]  object");
+            debugln("  adding new post...");
+            $.each(json_data, function(key, val){
+                debugln("  " + val.posted);
+                if(val.posted == "true"){
+                    alert("POSTED! :D");
+                }//end if
+                else{
+                    alert("POST FAILED! D:<");
+                }//end else
+            });
+        }//end function
+    });
+    debugln("END postQuestion");
+}//end function
+
+function register(event){
+    debugln("BEGIN register");
+    
+    debugln("END register");
 }//end function
 
 function showComments(id){
