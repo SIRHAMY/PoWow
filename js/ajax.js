@@ -166,7 +166,6 @@ function login(event){
     debugln("END login");
     //?
     event.preventDefault();
-    event.unbind();
 }//end function
 
 function postAnswer(event){
@@ -206,7 +205,6 @@ function postAnswer(event){
     debugln("END postAnswer");
     //?
     event.preventDefault();
-    event.unbind();
 }//end function
 
 function postQuestion(event){
@@ -249,13 +247,6 @@ function postQuestion(event){
     debugln("END postQuestion");
     //?
     event.preventDefault();
-    event.unbind();
-}//end function
-
-function register(event){
-    debugln("BEGIN register");
-    
-    debugln("END register");
 }//end function
 
 function showComments(id){
