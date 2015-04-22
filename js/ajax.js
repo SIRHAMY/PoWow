@@ -4,9 +4,10 @@ var USER_ID = "Anonymous";
 $(document).ready(function(){
     getAllPosts();
     getCategories();
-    $("#login-form-submit").click(login);
+    $("#login-form").submit(login);
     //$("#login-form-register").click(register(event));
-    $("#ask-form-submit").click(postQuestion);
+    $("#ask-form").submit(postQuestion);
+    $("#post-comment-form").submit(postAnswer);
 });
 
 function getAllPosts(){
@@ -110,14 +111,14 @@ function login(event){
     //alert("password: [" + password + "]");
     debugln("  password: [" + pass + "]");
     debugln("  attempting to login...");
-    debugln("username: [" + userName + "]\npassword: [" + pass + "]");
+    alert("username: [" + userName + "]\npassword: [" + pass + "]");
     $.ajax({
         type: "GET",
         url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/getUser.php",
-        data: {username: userName, password: pass}/*$("#login-form").serialize()*/,
+        data: {username: userName, password: pass},
         dataType: 'JSON',
-        success: function(json_data){
-            debugln("login sent!");
+        success: function(json_data, textStatus, jqXHR){
+            alert("login sent! [" + textStatus + "]");
             debugln("  found [" + json_data.length + "]  object");
             debugln("  adding new post...");
             $.each(json_data, function(key, val){
@@ -125,15 +126,68 @@ function login(event){
                 if(val.login == "true"){
                     USER_ID = userName;
                     alert("LOGGED IN! :D");
+                    //TODO(Brendan): redirect and clear form
                 }//end if
                 else{
                     USER_ID = "Anonymous";
                     alert("LOGIN FAILED! D:<");
                 }//end else
             });
-        }//end function
+        }/*,//end function
+        fail: function(msg){
+            alert("FAILURE");
+        },//end function
+        complete: function(msg){
+            alert("COMPLETE");
+        }//end function*/
     });
     debugln("END login");
+    //?
+    event.preventDefault();
+    event.unbind();
+}//end function
+
+function postAnswer(event){
+    debugln("BEGIN postAnswer");
+    debugln("  getting user name...");
+    var userName = USER_ID;
+    debugln("  username: [" + userName + "]");
+    debugln("  getting category...");
+    var cat = $("form input[type='radio']:checked").val();
+    debugln("  category: [" + cat + "]");
+    debugln("  getting question title...");
+    var ques = $("#ask-form-question").val();
+    debugln("  password: [" + ques + "]");
+    debugln("  getting more info...");
+    var quesMore = $("#ask-form-more").val();
+    debugln("  more: [" + quesMore + "]");
+    debugln("  attempting to post question...");
+    alert("username: [" + userName + "]\ncategory: [" + cat + "]\nquestion: [" + ques + "]\nMore: [" + quesMore + "]");
+    $.ajax({
+        type: "GET",
+        url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushQuestion.php",
+        data: {askerID: userName, qCategory: cat, qText: ques, qDescription: quesMore},
+        dataType: 'JSON',
+        success: function(json_data, textStatus, jqXHR){
+            alert("question sent! [" + textStatus + "]");
+            debugln("  found [" + json_data.length + "]  object");
+            debugln("  adding new post...");
+            $.each(json_data, function(key, val){
+                debugln("  " + val.posted);
+                if(val.posted == "true"){
+                    alert("POSTED! :D");
+                    //TODO(Brendan): clear form and redirect
+                }//end if
+                else{
+                    alert("POST FAILED! D:<");
+                }//end else
+            });
+        }//end function
+    });
+    debugln("END postAnswer");
+    //?
+    event.preventDefault();
+    event.unbind();
 }//end function
 
 function postQuestion(event){
@@ -157,14 +211,15 @@ function postQuestion(event){
         url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushQuestion.php",
         data: {askerID: userName, qCategory: cat, qText: ques, qDescription: quesMore},
         dataType: 'JSON',
-        success: function(json_data){
-            alert("  question sent!");
+        success: function(json_data, textStatus, jqXHR){
+            alert("question sent! [" + textStatus + "]");
             debugln("  found [" + json_data.length + "]  object");
             debugln("  adding new post...");
             $.each(json_data, function(key, val){
                 debugln("  " + val.posted);
                 if(val.posted == "true"){
                     alert("POSTED! :D");
+                    //TODO(Brendan): clear form and redirect
                 }//end if
                 else{
                     alert("POST FAILED! D:<");
@@ -173,6 +228,9 @@ function postQuestion(event){
         }//end function
     });
     debugln("END postQuestion");
+    //?
+    event.preventDefault();
+    event.unbind();
 }//end function
 
 function register(event){
