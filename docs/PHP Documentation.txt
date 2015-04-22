@@ -45,7 +45,8 @@ Returns whether the given credentials match those currently in the database
 
 BASEURL/getUser.php?userID=ENTERUSERID&userPass=ENTERUSERPASS
 
-Will return 1 if there's a match, 0 if there isn't.
+Return
+Will return true if there's a match, false if there isn't in form login: RESPONSE.
 
 
 
@@ -62,6 +63,12 @@ qText - The title of the question
 qDescription - Any additional text for the question
 qLat - question's asking latitude
 qLong - Question's asking longitude
+
+Return
+posted: RESPONSE where response is true or false depending on whether the SQL insertion was successful.
+
+
+pushResponse
 
 
 
