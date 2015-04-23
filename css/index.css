@@ -29,6 +29,8 @@
     background-image: url("./../img/downvote-grey_15x15.png");
     display: inline-block;
     height: 15px;
+    margin-left: 2px;
+    margin-right: 2px;
     width: 15px;
 }
 
@@ -45,6 +47,7 @@
     background-image: url("./../img/upvote-grey_15x15.png");
     display: inline-block;
     height: 15px;
+    margin-left: 2px;
     width: 15px;
 }
 

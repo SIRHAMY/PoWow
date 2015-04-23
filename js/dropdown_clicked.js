@@ -60,7 +60,7 @@ function dropdownSettingsItem(event){
         $("#login").show(250);
     }//end if
     else if(clickedId == "dropdown-settings-profile"){
-        debugln("  hiding ask and posts divs...");
+        debugln("  hiding content divs...");
         $("#ask").hide();
         $("#posts").hide();
         $("#post").hide();
@@ -68,5 +68,20 @@ function dropdownSettingsItem(event){
         debugln("  showing profile form...");
         $("#profile").show(250);
     }//end if
+    else if(clickedId == "dropdown-settings-logout"){
+        debugln("  hiding content divs...");
+        $("#ask").hide();
+        $("#posts").hide();
+        $("#post").hide();
+        $("#profile").hide();
+        debugln("  hiding logout dropdown item...");
+        $("#dropdown-settings-logout").hide();
+        debugln("  showing login dropdown item...");
+        $("#dropdown-settings-login").show();
+        debugln("  showing login form...");
+        $("#login").show(250);
+        //reset user
+        USER_ID = DEFAULT_USER_ID;
+    }//end else if
     debugln("END dropdownSettingsItem");
 }//end method

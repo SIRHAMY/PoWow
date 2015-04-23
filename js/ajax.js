@@ -1,11 +1,11 @@
 
-var USER_ID = "Anonymous";
+var DEFAULT_USER_ID = "Anonymous";
+var USER_ID = DEFAULT_USER_ID;
 
 $(document).ready(function(){
     getAllPosts();
     getCategories();
     $("#login-form").submit(login);
-    //$("#login-form-register").click(register(event));
     $("#ask-form").submit(postQuestion);
     $("#post-comment-form").submit(postAnswer);
 });
@@ -47,6 +47,7 @@ function getPosts(category){
         data: {qCategory: category},
         dataType: 'JSON',
         success: function(json_data){
+            alert("boop");
             debugln("  found [" + json_data.length + "] posts!");
             debugln("  clearing posts...");
             $("#posts").empty();
@@ -61,6 +62,9 @@ function getPosts(category){
                     "</div>"
                 );
             });
+        },//end function
+        error: function(request, error){
+            alert("ERROR:\n  [" + request + "]\n  error: [" + error + "]");
         }//end function
     });
     debugln("END getPosts");
@@ -112,8 +116,8 @@ function login(event){
     debugln("  password: [" + pass + "]");
     debugln("  attempting to login...");
     var submitBtn = $(this).find("input[type=submit]:focus");
-    alert(submitBtn.attr("id"));
-    alert("username: [" + userName + "]\npassword: [" + pass + "]");
+    //alert(submitBtn.attr("id"));
+    //alert("username: [" + userName + "]\npassword: [" + pass + "]");
     if(submitBtn.attr("id") == "login-form-submit"){
         $.ajax({
             type: "GET",
@@ -121,19 +125,30 @@ function login(event){
             data: {username: userName, password: pass},
             dataType: 'JSON',
             success: function(json_data, textStatus, jqXHR){
-                alert("login sent! [" + textStatus + "]");
+                //alert("login sent! [" + textStatus + "]");
                 debugln("  found [" + json_data.length + "]  object");
                 debugln("  logging into account...");
                 $.each(json_data, function(key, val){
                     debugln("  " + val.login);
                     if(val.login == "true"){
                         USER_ID = userName;
-                        alert("LOGGED IN! :D");
-                        //TODO(Brendan): redirect and clear form
+                        alert("SUCCESSFULLY LOGGED IN AS: [" + USER_ID + "]");
+                        debugln("  clearing form data...");
+                        $("#login-form-username").val("");
+                        $("#login-form-password").val("");
+                        debugln("  hiding login dropdown item...");
+                        $("#dropdown-settings-login").hide();
+                        debugln("  showing logout dropdown item...");
+                        $("#dropdown-settings-logout").show();
+                        debugln("  redirecting to home...");
+                        $("#login").hide();
+                        $("#posts").show(250);
                     }//end if
                     else{
-                        USER_ID = "Anonymous";
-                        alert("LOGIN FAILED! D:<");
+                        USER_ID = DEFAULT_USER_ID;
+                        alert("FAILED TO AUTHENTICATE AS: [" + userName + "]");
+                        debugln("  clearing password...");
+                        $("#login-form-password").val("");
                     }//end else
                 });
             }//end function
@@ -254,19 +269,6 @@ function showComments(id){
     var categories;
     debugln("  clearing old post...");
     $("#post-comment-section").empty();
-    /*
-    debugln("  clearing old comment...");
-    $("#post-comment").empty();
-    debugln("  adding answer form...");
-    $("#post-comment").append(
-        "<form id=\"post-comment-form\">" +
-        "<span style=\"font-size: 10px;\">Your Answer:</span>" +
-        "<textarea id=\"post-comment-form-val\"></textarea>" +
-        "<input id=\"post-comment-form-submit\" type=\"submit\" value=\"Answer\" />" +
-        "<input type=\"hidden\" id=\"post-id\" value=\"" + id + "\"/>" + 
-        "</form>"
-    );
-    */
     debugln("  setting question id");
     $("#post-id").attr("value", id);
     debugln("  getting AJAX for post ID [" + id + "]...");
