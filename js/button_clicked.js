@@ -17,6 +17,7 @@ function AskClicked(event){
     $("#login").hide();
     $("#profile").hide();
     $("#post").hide();
+    $("#error").hide();
     debugln("  hiding dropdowns...");
     $("#dropdown-settings").hide();
     $("#dropdown-pinned").hide();

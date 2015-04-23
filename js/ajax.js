@@ -14,6 +14,7 @@ function displayAJAXError(message, jqXHR, textStatus, errorThrown){
     debugln("BEGIN displayError");
     debugln("  clearing error message...");
     $("#error-message").empty();
+    $("#error-details").empty();
     debugln("  generating content...");
     $("#error-message").append(
         message + "<br /><br />" +
@@ -25,11 +26,11 @@ function displayAJAXError(message, jqXHR, textStatus, errorThrown){
                 "Response Text:<br />" + 
                 "&nbsp;&nbsp;" + jqXHR.responseText +
             "</li>" +
+            /*
             "<li>" +
                 "Response XML:<br />" +
                 "&nbsp;&nbsp;" + jqXHR.responseXML +
             "</li>" +
-            /*
             "<li>" +
                 "Response Header:<br />" +
                 "&nbsp;&nbsp;" + jqXHR.getResponseHeader +

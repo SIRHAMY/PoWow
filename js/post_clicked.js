@@ -14,6 +14,7 @@ function postClicked(event){
     $("#login").hide();
     $("#profile").hide();
     $("#ask").hide();
+    $("#error").hide();
     showPost(clickedId);
     showComments(clickedId);
     $("#post").show(250);

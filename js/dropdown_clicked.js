@@ -35,6 +35,7 @@ function dropdownPinnedItem(event){
     $("#login").hide();
     $("#profile").hide();
     $("#ask").hide();
+    $("#error").hide();
     $("#post").show(250);
     debugln("END dropdownPinnedItem");
 }//end function
@@ -56,6 +57,7 @@ function dropdownSettingsItem(event){
         $("#posts").hide();
         $("#post").hide();
         $("#profile").hide();
+        $("#error").hide();
         debugln("  showing login form...");
         $("#login").show(250);
     }//end if
@@ -65,6 +67,7 @@ function dropdownSettingsItem(event){
         $("#posts").hide();
         $("#post").hide();
         $("#login").hide();
+        $("#error").hide();
         debugln("  showing profile form...");
         $("#profile").show(250);
     }//end if
@@ -74,6 +77,7 @@ function dropdownSettingsItem(event){
         $("#posts").hide();
         $("#post").hide();
         $("#profile").hide();
+        $("#error").hide();
         debugln("  hiding logout dropdown item...");
         $("#dropdown-settings-logout").hide();
         debugln("  showing login dropdown item...");

@@ -17,6 +17,7 @@ function categoryClicked(event){
     $("#login").hide();
     $("#profile").hide();
     $("#post").hide();
+    $("#error").hide();
     debugln("  fixing HUD button...");
     $("#button-cancel").hide();
     $("#button-ask").show();
