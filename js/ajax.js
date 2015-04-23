@@ -162,17 +162,28 @@ function login(event){
             data: {username: userName, password: pass},
             dataType: 'JSON',
             success: function(json_data, textStatus, jqXHR){
-                alert("register sent! [" + textStatus + "]");
+                //alert("register sent! [" + textStatus + "]");
                 debugln("  found [" + json_data.length + "]  object");
                 debugln("  registering account...");
                 $.each(json_data, function(key, val){
                     debugln("  " + val.joined);
                     if(val.joined == "true"){
-                        alert("REGISTERED! :D");
-                        //TODO(Brendan): redirect and clear form
+                        alert("SUCCESSFULLY REGISTERED!\nWelcome to PoWoW, " + userName + ".");
+                        debugln("  clearing form data...");
+                        $("#login-form-username").val("");
+                        $("#login-form-password").val("");
+                        debugln("  hiding login dropdown item...");
+                        $("#dropdown-settings-login").hide();
+                        debugln("  showing logout dropdown item...");
+                        $("#dropdown-settings-logout").show();
+                        debugln("  logging in as registered user...");
+                        USER_ID = userName;
+                        debugln("  redirecting to home...");
+                        $("#login").hide();
+                        $("#posts").show(250);
                     }//end if
                     else{
-                        alert("REGISTRATION FAILED! D:<");
+                        alert("FAILED TO REGISTER PoWoW ACCOUNT FOR [" + userName + "]\nTry again with different user name.");
                     }//end else
                 });
             }//end function
