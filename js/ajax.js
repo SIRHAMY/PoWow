@@ -47,7 +47,7 @@ function getPosts(category){
         data: {qCategory: category},
         dataType: 'JSON',
         success: function(json_data){
-            alert("boop");
+            //alert("posts found");
             debugln("  found [" + json_data.length + "] posts!");
             debugln("  clearing posts...");
             $("#posts").empty();
@@ -64,7 +64,12 @@ function getPosts(category){
             });
         },//end function
         error: function(request, error){
-            alert("ERROR:\n  [" + request + "]\n  error: [" + error + "]");
+            alert("ERROR:\n" +
+                  "  Something went wrong when pulling questions\n" +
+                  "    for category [" + category + "]\n" +
+                  "  If you see a PoWoW engineer, show him/her this:\n" +
+                  "    ERROR DETAILS: [" + error + "]"
+            );
         }//end function
     });
     debugln("END getPosts");
@@ -206,24 +211,27 @@ function postAnswer(event){
     var comment = $("#post-comment-form-val").val();
     debugln("  comment: [" + comment + "]");
     debugln("  attempting to post question...");
-    alert("username: [" + userName + "]\npostID: [" + postID + "]\ncomment: [" + comment + "]");
+    //alert("username: [" + userName + "]\npostID: [" + postID + "]\ncomment: [" + comment + "]");
     $.ajax({
         type: "GET",
         url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushResponse.php",
         data: {responderID: userName, origQuestion: postID, responseText: comment},
         dataType: 'JSON',
         success: function(json_data, textStatus, jqXHR){
-            alert("comment sent! [" + textStatus + "]");
+            //alert("comment sent! [" + textStatus + "]");
             debugln("  found [" + json_data.length + "]  object");
             debugln("  adding new comment...");
             $.each(json_data, function(key, val){
                 debugln("  " + val.posted);
                 if(val.posted == "true"){
-                    alert("POSTED! :D");
-                    //TODO(Brendan): clear form, refresh page
+                    //alert("POSTED! :D");
+                    debugln("  clearing comment form...");
+                    $("#post-comment-form-val").val("");
+                    debugln("  refreshing comment section...");
+                    showComments(postID);
                 }//end if
                 else{
-                    alert("POST FAILED! D:<");
+                    alert("FAILED TO POST COMMENT\n  Uknown error occurred; try again.");
                 }//end else
             });
         }//end function
@@ -255,17 +263,24 @@ function postQuestion(event){
         data: {askerID: userName, qCategory: cat, qText: ques, qDescription: quesMore},
         dataType: 'JSON',
         success: function(json_data, textStatus, jqXHR){
-            alert("question sent! [" + textStatus + "]");
+            //alert("question sent! [" + textStatus + "]");
             debugln("  found [" + json_data.length + "]  object");
             debugln("  adding new post...");
             $.each(json_data, function(key, val){
                 debugln("  " + val.posted);
                 if(val.posted == "true"){
                     alert("POSTED! :D");
-                    //TODO(Brendan): clear form and redirect
+                    debugln("  clearing form data...");
+                    $("#ask-form-question").val("");
+                    $("#ask-form-more").val("");
+                    $("#ask-form-cat > input").each(function(){
+                        $(this).prop("checked", false);
+                    });
+                    //TODO(Brendan): redirect to their thread
+                    //               if not DEFAULT_USER_ID, pin this thread too
                 }//end if
                 else{
-                    alert("POST FAILED! D:<");
+                    alert("FAILED TO POST QUESTION\n  Uknown error occurred; try again.");
                 }//end else
             });
         }//end function
@@ -278,7 +293,7 @@ function postQuestion(event){
 function showComments(id){
     debugln("BEGIN showComments");
     var categories;
-    debugln("  clearing old post...");
+    debugln("  clearing old comment section...");
     $("#post-comment-section").empty();
     debugln("  setting question id");
     $("#post-id").attr("value", id);
