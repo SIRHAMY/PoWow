@@ -197,6 +197,8 @@ function login(event){
                         $("#dropdown-settings-login").hide();
                         debugln("  showing logout dropdown item...");
                         $("#dropdown-settings-logout").show();
+                        debugln("  showing my profile dropdown item...");
+                        $("#dropdown-settings-profile").show();
                         debugln("  redirecting to home...");
                         $("#login").hide();
                         $("#posts").show(250);

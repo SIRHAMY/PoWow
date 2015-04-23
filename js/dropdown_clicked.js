@@ -54,12 +54,17 @@ function dropdownSettingsItem(event){
         $("#login").show(250);
     }//end if
     else if(clickedId == "dropdown-settings-profile"){
+        debugln("  updating profile page...");
+        $("#profile-title").text(USER_ID + "'s Profile:");
+        //TODO(Brendan): add more profile stats and such
         debugln("  showing profile form...");
         $("#profile").show(250);
     }//end if
     else if(clickedId == "dropdown-settings-logout"){
         debugln("  hiding logout dropdown item...");
         $("#dropdown-settings-logout").hide();
+        debugln("  hiding my profile dropdown item...");
+        $("#dropdown-settings-profile").hide();
         debugln("  showing login dropdown item...");
         $("#dropdown-settings-login").show();
         debugln("  showing login form...");

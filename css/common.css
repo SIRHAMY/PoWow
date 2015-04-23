@@ -291,6 +291,10 @@ html, body{
     display: none;
 }
 
+#dropdown-settings-profile {
+    display: none;
+}
+
 #error {
     background-color: #E08036;
     border-color: #6C6D70;
