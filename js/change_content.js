@@ -7,5 +7,6 @@ function hideContent(){
     $("#post").hide();
     $("#posts").hide();
     $("#profile").hide();
+    $("#success").hide();
     debugln("END hideContent");
 }//end function

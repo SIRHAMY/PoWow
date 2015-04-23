@@ -11,7 +11,7 @@ $(document).ready(function(){
 });
 
 function displayAJAXError(message, jqXHR, textStatus, errorThrown){
-    debugln("BEGIN displayError");
+    debugln("BEGIN displayAJAXError");
     debugln("  clearing error message...");
     $("#error-message").empty();
     $("#error-details").empty();
@@ -48,7 +48,37 @@ function displayAJAXError(message, jqXHR, textStatus, errorThrown){
     );
     debugln("  showing error message...");
     $("#error").show(250);
-    debugln("END displayError");
+    debugln("END displayAJAXError");
+}//end function
+
+function displayFormError(error, errorDetails){
+    debugln("BEGIN displayFormError");
+    debugln("  clearing error message...");
+    $("#error-message").empty();
+    $("#error-details").empty();
+    debugln("  generating content...");
+    $("#error-message").append(
+        error + "<br /><br />"
+     );
+    $("#error-details").append(
+        errorDetails
+    );
+    debugln("  showing error message...");
+    $("#error").show(250);
+    debugln("END displayFormError");
+}//end function
+
+function displaySuccess(message){
+    debugln("BEGIN displaySuccess");
+    debugln("  clearing success message...");
+    $("#success-message").empty();
+    debugln("  generating content...");
+    $("#success-message").append(
+        message
+     );
+    debugln("  showing success message...");
+    $("#success").show(250);
+    debugln("END displaySuccess");
 }//end function
 
 function getAllPosts(){
@@ -174,91 +204,131 @@ function login(event){
     debugln("  attempting to login...");
     var submitBtn = $(this).find("input[type=submit]:focus");
     //alert(submitBtn.attr("id"));
-    //alert("username: [" + userName + "]\npassword: [" + pass + "]");
+    var errorDetails = "";
+    var regexUserName = new RegExp("^[A-Za-z0-9_]{6,20}$");
+    var validatedUser = userName.match(regexUserName);
+    var regexUserPass = new RegExp("^[A-Za-z0-9!@#\$%\^&\*\(\)]{6,30}$");
+    var validatedPass = pass.match(regexUserPass);
+    /*alert("username: [" + userName + "]\npassword: [" + pass + "]");
+    if(validatedUser == null || validatedPass == null){
+        alert("regex validation failed!");
+    }//end if*/
     if(submitBtn.attr("id") == "login-form-submit"){
-        $.ajax({
-            type: "GET",
-            url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/getUser.php",
-            data: {username: userName, password: pass},
-            dataType: 'JSON',
-            success: function(json_data, textStatus, jqXHR){
-                //alert("login sent! [" + textStatus + "]");
-                debugln("  found [" + json_data.length + "]  object");
-                debugln("  logging into account...");
-                $.each(json_data, function(key, val){
-                    debugln("  " + val.login);
-                    if(val.login == "true"){
-                        USER_ID = userName;
-                        alert("SUCCESSFULLY LOGGED IN AS: [" + USER_ID + "]");
-                        debugln("  clearing form data...");
-                        $("#login-form-username").val("");
-                        $("#login-form-password").val("");
-                        debugln("  hiding login dropdown item...");
-                        $("#dropdown-settings-login").hide();
-                        debugln("  showing logout dropdown item...");
-                        $("#dropdown-settings-logout").show();
-                        debugln("  showing my profile dropdown item...");
-                        $("#dropdown-settings-profile").show();
-                        debugln("  redirecting to home...");
-                        $("#login").hide();
-                        $("#posts").show(250);
-                    }//end if
-                    else{
-                        USER_ID = DEFAULT_USER_ID;
-                        alert("FAILED TO AUTHENTICATE AS: [" + userName + "]");
-                        debugln("  clearing password...");
-                        $("#login-form-password").val("");
-                    }//end else
-                });
-            },//end function
-            error: function(jqXHR, textStatus, errorThrown){
-                displayAJAXError(
-                      "Something went wrong when attempting to log in",
-                      jqXHR, textStatus, errorThrown                  
-                );
-            }//end function
-        });
+        if(validatedUser == null || validatedPass == null){
+            displayFormError(
+                "Failed to authenticate", 
+                "Please check the username and password combination and try again"
+            );
+        }//end if
+        else{
+            $.ajax({
+                type: "GET",
+                url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/getUser.php",
+                data: {username: userName, password: pass},
+                dataType: 'JSON',
+                success: function(json_data, textStatus, jqXHR){
+                    //alert("login sent! [" + textStatus + "]");
+                    debugln("  found [" + json_data.length + "]  object");
+                    debugln("  logging into account...");
+                    $.each(json_data, function(key, val){
+                        debugln("  " + val.login);
+                        if(val.login == "true"){
+                            USER_ID = userName;
+                            //alert("SUCCESSFULLY LOGGED IN AS: [" + USER_ID + "]");
+                            displaySuccess("You are now logged in. Welcome back, " + USER_ID + ".");
+                            debugln("  clearing form data...");
+                            $("#login-form-username").val("");
+                            $("#login-form-password").val("");
+                            debugln("  hiding login dropdown item...");
+                            $("#dropdown-settings-login").hide();
+                            debugln("  showing logout dropdown item...");
+                            $("#dropdown-settings-logout").show();
+                            debugln("  showing my profile dropdown item...");
+                            $("#dropdown-settings-profile").show();
+                            debugln("  redirecting to home...");
+                            $("#login").hide();
+                            $("#posts").show(250);
+                        }//end if
+                        else{
+                            USER_ID = DEFAULT_USER_ID;
+                            //alert("FAILED TO AUTHENTICATE AS: [" + userName + "]");
+                            displayFormError(
+                                "Failed to authenticate", 
+                                "Please check the username and password combination and try again"
+                            );
+                            debugln("  clearing password...");
+                            $("#login-form-password").val("");
+                        }//end else
+                    });
+                },//end function
+                error: function(jqXHR, textStatus, errorThrown){
+                    displayAJAXError(
+                          "Something went wrong when attempting to log in",
+                          jqXHR, textStatus, errorThrown                  
+                    );
+                }//end function
+            });
+        }//end else
     }//end if
     else if(submitBtn.attr("id") == "login-form-register"){
         //alert("username: [" + userName + "] password: [" + pass + "]");
-        $.ajax({
-            type: "GET",
-            url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushUser.php",
-            data: {username: userName, password: pass},
-            dataType: 'JSON',
-            success: function(json_data, textStatus, jqXHR){
-                //alert("register sent! [" + textStatus + "]");
-                debugln("  found [" + json_data.length + "]  object");
-                debugln("  registering account...");
-                $.each(json_data, function(key, val){
-                    debugln("  " + val.joined);
-                    if(val.joined == "true"){
-                        alert("SUCCESSFULLY REGISTERED!\nWelcome to PoWoW, " + userName + ".");
-                        debugln("  clearing form data...");
-                        $("#login-form-username").val("");
-                        $("#login-form-password").val("");
-                        debugln("  hiding login dropdown item...");
-                        $("#dropdown-settings-login").hide();
-                        debugln("  showing logout dropdown item...");
-                        $("#dropdown-settings-logout").show();
-                        debugln("  logging in as registered user...");
-                        USER_ID = userName;
-                        debugln("  redirecting to home...");
-                        $("#login").hide();
-                        $("#posts").show(250);
-                    }//end if
-                    else{
-                        alert("FAILED TO REGISTER PoWoW ACCOUNT FOR [" + userName + "]\nTry again with different user name.");
-                    }//end else
-                });
-            },//end function
-            error: function(jqXHR, textStatus, errorThrown){
-                displayAJAXError(
-                      "Something went wrong when attempting to register",
-                      jqXHR, textStatus, errorThrown                  
-                );
-            }//end function
-        });
+        if(validatedUser == null || validatedPass == null){
+            displayFormError(
+                "Failed to register", 
+                "Please check the username and password combination and try again:<br /><br/>" +
+                "Usernames can only contain an underscore and alphanumeric characters. " +
+                "Usernames must be 6 to 20 characters long<br /><br/>" +
+                "Passwords can only contain alphanumeric and special characters." +
+                "Special characters are defined as:<br /><br />" +
+                "!@#$%^&*()<br /><br />" +
+                "Passwords must be between 6 and 30 characters"
+            );
+        }//end if
+        else{
+            $.ajax({
+                type: "GET",
+                url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushUser.php",
+                data: {username: userName, password: pass},
+                dataType: 'JSON',
+                success: function(json_data, textStatus, jqXHR){
+                    //alert("register sent! [" + textStatus + "]");
+                    debugln("  found [" + json_data.length + "]  object");
+                    debugln("  registering account...");
+                    $.each(json_data, function(key, val){
+                        debugln("  " + val.joined);
+                        if(val.joined == "true"){
+                            //alert("SUCCESSFULLY REGISTERED!\nWelcome to PoWoW, " + userName + ".");
+                            displaySuccess("You are now registered. Welcome to PoWoW, " + USER_ID + ".");
+                            debugln("  clearing form data...");
+                            $("#login-form-username").val("");
+                            $("#login-form-password").val("");
+                            debugln("  hiding login dropdown item...");
+                            $("#dropdown-settings-login").hide();
+                            debugln("  showing logout dropdown item...");
+                            $("#dropdown-settings-logout").show();
+                            debugln("  logging in as registered user...");
+                            USER_ID = userName;
+                            debugln("  redirecting to home...");
+                            $("#login").hide();
+                            $("#posts").show(250);
+                        }//end if
+                        else{
+                            //alert("FAILED TO REGISTER PoWoW ACCOUNT FOR [" + userName + "]\nTry again with different user name.");
+                            displayFormError(
+                                "Failed to register", 
+                                "Username is already taken.  Please try a different username."
+                            );
+                        }//end else
+                    });
+                },//end function
+                error: function(jqXHR, textStatus, errorThrown){
+                    displayAJAXError(
+                          "Something went wrong when attempting to register",
+                          jqXHR, textStatus, errorThrown                  
+                    );
+                }//end function
+            });
+        }//end else
     }//end else if
     debugln("END login");
     //?

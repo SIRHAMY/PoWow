@@ -389,6 +389,26 @@ html, body{
     background-color: #6C6D70;
 }
 
+#success {
+    background-color: #89E894;
+    border-color: #6C6D70;
+    border-style: solid;
+    border-width: 2px;
+    color: #3F3F41;
+    display: none;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+#success-message {
+    color: inherit;
+    font-size: 15px;
+    font-weight: normal;
+}
+
 #title {
     color: #FFFFFF;
     float: left;

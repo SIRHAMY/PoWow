@@ -61,6 +61,9 @@ function dropdownSettingsItem(event){
         $("#profile").show(250);
     }//end if
     else if(clickedId == "dropdown-settings-logout"){
+        displaySuccess(
+            "You have logged out of PoWoW."
+        );
         debugln("  hiding logout dropdown item...");
         $("#dropdown-settings-logout").hide();
         debugln("  hiding my profile dropdown item...");
