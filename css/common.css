@@ -291,6 +291,37 @@ html, body{
     display: none;
 }
 
+#error {
+    background-color: #E08036;
+    border-color: #6C6D70;
+    border-style: solid;
+    border-width: 2px;
+    color: #3F3F41;
+    display: none;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+#error-details {
+    color: inherit;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+#error-details > ul {
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+#error-message {
+    color: inherit;
+    font-size: 15px;
+    font-weight: normal;
+}
+
 #footer-inner {
     background-color: inherit;
     color: #FFFFFF;

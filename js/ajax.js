@@ -10,6 +10,46 @@ $(document).ready(function(){
     $("#post-comment-form").submit(postAnswer);
 });
 
+function displayAJAXError(message, jqXHR, textStatus, errorThrown){
+    debugln("BEGIN displayError");
+    debugln("  clearing error message...");
+    $("#error-message").empty();
+    debugln("  generating content...");
+    $("#error-message").append(
+        message + "<br /><br />" +
+        "If you see a PoWoW engineer, show him/her this:<br /><br />"
+     );
+    $("#error-details").append(
+        "<ul>" +
+            "<li>" +
+                "Response Text:<br />" + 
+                "&nbsp;&nbsp;" + jqXHR.responseText +
+            "</li>" +
+            "<li>" +
+                "Response XML:<br />" +
+                "&nbsp;&nbsp;" + jqXHR.responseXML +
+            "</li>" +
+            /*
+            "<li>" +
+                "Response Header:<br />" +
+                "&nbsp;&nbsp;" + jqXHR.getResponseHeader +
+            "</li>" +
+            */
+            "<li>" +
+                "Text Status:<br />" +
+                "&nbsp;&nbsp;" + textStatus +
+            "</li>" +
+            "<li>" +
+                "Error Thrown:<br />" +
+                "&nbsp;&nbsp;" + errorThrown +
+            "</li>" +
+        "</ul>"
+    );
+    debugln("  showing error message...");
+    $("#error").show(250);
+    debugln("END displayError");
+}//end function
+
 function getAllPosts(){
     debugln("BEGIN getAllPosts");
     debugln("  getting AJAX...");
@@ -33,6 +73,12 @@ function getAllPosts(){
                     "</div>"
                 );
             });
+        },//end function
+        error: function(jqXHR, textStatus, errorThrown){
+            displayAJAXError(
+                  "Something went wrong when pulling questions for homepage",
+                  jqXHR, textStatus, errorThrown                  
+            );
         }//end function
     });
     debugln("END getAllPosts");
@@ -41,6 +87,8 @@ function getAllPosts(){
 function getPosts(category){
     debugln("BEGIN getPosts");
     debugln("  getting posts with category [" + category + "]...");
+    debugln("  clearing posts...");
+    $("#posts").empty();
     $.ajax({
         type: "GET",
         url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/getCatQuestions.php",
@@ -49,8 +97,6 @@ function getPosts(category){
         success: function(json_data){
             //alert("posts found");
             debugln("  found [" + json_data.length + "] posts!");
-            debugln("  clearing posts...");
-            $("#posts").empty();
             debugln("  adding posts...");
             $.each(json_data, function(key, val){
                 $("#posts").append(
@@ -63,12 +109,11 @@ function getPosts(category){
                 );
             });
         },//end function
-        error: function(request, error){
-            alert("ERROR:\n" +
-                  "  Something went wrong when pulling questions\n" +
-                  "    for category [" + category + "]\n" +
-                  "  If you see a PoWoW engineer, show him/her this:\n" +
-                  "    ERROR DETAILS: [" + error + "]"
+        error: function(jqXHR, textStatus, errorThrown){
+            displayAJAXError(
+                  "Something went wrong when pulling questions" +
+                  " for category [" + category + "]",
+                  jqXHR, textStatus, errorThrown                  
             );
         }//end function
     });
@@ -103,6 +148,12 @@ function getCategories(){
             debugln("  adding clear div...");
             $("#dropdown-cat").append(
                 "<div class=\"clear\"></div>"
+            );
+        },//end function
+        error: function(jqXHR, textStatus, errorThrown){
+            displayAJAXError(
+                  "Something went wrong when retrieving categories",
+                  jqXHR, textStatus, errorThrown                  
             );
         }//end function
     });
@@ -156,6 +207,12 @@ function login(event){
                         $("#login-form-password").val("");
                     }//end else
                 });
+            },//end function
+            error: function(jqXHR, textStatus, errorThrown){
+                displayAJAXError(
+                      "Something went wrong when attempting to log in",
+                      jqXHR, textStatus, errorThrown                  
+                );
             }//end function
         });
     }//end if
@@ -191,6 +248,12 @@ function login(event){
                         alert("FAILED TO REGISTER PoWoW ACCOUNT FOR [" + userName + "]\nTry again with different user name.");
                     }//end else
                 });
+            },//end function
+            error: function(jqXHR, textStatus, errorThrown){
+                displayAJAXError(
+                      "Something went wrong when attempting to register",
+                      jqXHR, textStatus, errorThrown                  
+                );
             }//end function
         });
     }//end else if
@@ -234,6 +297,12 @@ function postAnswer(event){
                     alert("FAILED TO POST COMMENT\n  Uknown error occurred; try again.");
                 }//end else
             });
+        },//end function
+        error: function(jqXHR, textStatus, errorThrown){
+            displayAJAXError(
+                  "Something went wrong when posting answer",
+                  jqXHR, textStatus, errorThrown                  
+            );
         }//end function
     });
     debugln("END postAnswer");
@@ -283,6 +352,12 @@ function postQuestion(event){
                     alert("FAILED TO POST QUESTION\n  Uknown error occurred; try again.");
                 }//end else
             });
+        },//end function
+        error: function(jqXHR, textStatus, errorThrown){
+            displayAJAXError(
+                  "Something went wrong when posting question",
+                  jqXHR, textStatus, errorThrown                  
+            );
         }//end function
     });
     debugln("END postQuestion");
@@ -319,6 +394,12 @@ function showComments(id){
                     "</div>"
                 );
             });
+        },//end function
+        error: function(jqXHR, textStatus, errorThrown){
+            displayAJAXError(
+                  "Something went wrong when retrieving answers",
+                  jqXHR, textStatus, errorThrown                  
+            );
         }//end function
     });
     debugln("END showComments");
@@ -354,6 +435,12 @@ function showPost(id){
                     "</div>"
                 );
             });
+        },//end function
+        error: function(jqXHR, textStatus, errorThrown){
+            displayAJAXError(
+                  "Something went wrong when retrieving question information",
+                  jqXHR, textStatus, errorThrown                  
+            );
         }//end function
     });
     debugln("END showPost");
