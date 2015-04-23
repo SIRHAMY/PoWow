@@ -7,9 +7,6 @@
  */
  
 $(document).ready(function(){
-    /*$("#nav-cat").click(toggleBackground);
-    $("#nav-pinned").click(toggleBackground);
-    $("#nav-settings").click(toggleBackground);*/
     $("#nav-cat").click(handleClick);
     $("#nav-pinned").click(handleClick);
     $("#nav-settings").click(handleClick);

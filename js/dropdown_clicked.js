@@ -31,11 +31,7 @@ function dropdownPinnedItem(event){
     $("#nav-pinned").removeClass("nav-selected");
     //TODO(ALL): use AJAX to pull pin data
     debugln("  hiding content areas...");
-    $("#posts").hide();
-    $("#login").hide();
-    $("#profile").hide();
-    $("#ask").hide();
-    $("#error").hide();
+    hideContent();
     $("#post").show(250);
     debugln("END dropdownPinnedItem");
 }//end function
@@ -51,40 +47,23 @@ function dropdownSettingsItem(event){
     $("#dropdown-settings").hide();
     debugln("  removing selected class...");
     $("#nav-settings").removeClass("nav-selected");
+    debugln("  hiding content divs...");
+    hideContent();
     if(clickedId == "dropdown-settings-login"){
-        debugln("  hiding content divs...");
-        $("#ask").hide();
-        $("#posts").hide();
-        $("#post").hide();
-        $("#profile").hide();
-        $("#error").hide();
         debugln("  showing login form...");
         $("#login").show(250);
     }//end if
     else if(clickedId == "dropdown-settings-profile"){
-        debugln("  hiding content divs...");
-        $("#ask").hide();
-        $("#posts").hide();
-        $("#post").hide();
-        $("#login").hide();
-        $("#error").hide();
         debugln("  showing profile form...");
         $("#profile").show(250);
     }//end if
     else if(clickedId == "dropdown-settings-logout"){
-        debugln("  hiding content divs...");
-        $("#ask").hide();
-        $("#posts").hide();
-        $("#post").hide();
-        $("#profile").hide();
-        $("#error").hide();
         debugln("  hiding logout dropdown item...");
         $("#dropdown-settings-logout").hide();
         debugln("  showing login dropdown item...");
         $("#dropdown-settings-login").show();
         debugln("  showing login form...");
         $("#login").show(250);
-        //reset user
         USER_ID = DEFAULT_USER_ID;
     }//end else if
     debugln("END dropdownSettingsItem");

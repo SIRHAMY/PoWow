@@ -18,7 +18,7 @@
     border-right-width: 2px;
     border-top-width: 2px;
     border-color: #A19378;
-    font-size: 20px;
+    font-size: 15px;
     margin-top: 3px;
     margin-bottom: 3px;
     padding: 3px;
@@ -30,7 +30,7 @@
     display: inline-block;
     height: 15px;
     margin-left: 2px;
-    margin-right: 2px;
+    margin-right: 5px;
     width: 15px;
 }
 

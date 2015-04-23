@@ -17,7 +17,7 @@ function closeLogin(event){
     $("#button-cancel").hide();
     $("#button-ask").show();
     debugln("  hiding login form..");
-    $("#login").hide();
+    hideContent();
     debugln("  showing posts...");
     $("#posts").show(250);
     debugln("END closeLogin");

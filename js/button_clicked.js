@@ -13,11 +13,7 @@ $(document).ready(function(){
 function AskClicked(event){
     debugln("BEGIN AskClicked");
     debugln("  hiding content divs..");
-    $("#posts").hide();
-    $("#login").hide();
-    $("#profile").hide();
-    $("#post").hide();
-    $("#error").hide();
+    hideContent();
     debugln("  hiding dropdowns...");
     $("#dropdown-settings").hide();
     $("#dropdown-pinned").hide();
@@ -36,7 +32,7 @@ function AskClicked(event){
 function CancelClicked(event){
     debugln("BEGIN CancelClicked");
     debugln("  hiding content divs...");
-    $("#ask").hide();
+    hideContent();
     debugln("  toggling buttons...");
     $("#button-cancel").hide();
     $("#button-ask").show();

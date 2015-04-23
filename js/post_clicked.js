@@ -10,14 +10,9 @@ function postClicked(event){
     var clickedId = event.target.id;
     debugln("  clickedId: [" + clickedId + "]");
     debugln("  hiding content areas...");
-    $("#posts").hide();
-    $("#login").hide();
-    $("#profile").hide();
-    $("#ask").hide();
-    $("#error").hide();
+    hideContent();
     showPost(clickedId);
     showComments(clickedId);
     $("#post").show(250);
-    //TODO(ALL): use AJAX to load this data and comment section
     debugln("END postClicked");
 }//end function

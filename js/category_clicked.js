@@ -13,11 +13,7 @@ function categoryClicked(event){
     $("#dropdown-cat").hide();
     $("#nav-cat").removeClass("nav-selected");
     debugln("  hiding other page forms...");
-    $("#ask").hide();
-    $("#login").hide();
-    $("#profile").hide();
-    $("#post").hide();
-    $("#error").hide();
+    hideContent();
     debugln("  fixing HUD button...");
     $("#button-cancel").hide();
     $("#button-ask").show();
