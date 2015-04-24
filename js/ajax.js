@@ -93,17 +93,26 @@ function getAllPosts(){
             debugln("  clearing posts...");
             $("#posts").empty();
             debugln("  adding posts...");
-            $.each(json_data, function(key, val){
-                debugln("  " + key + "{" + val.question_id + ", " + val.question_text + ", " + val.question_category + "}");
+            if((json_data.length == 1) && (json_data[0].returned == "false")){
                 $("#posts").append(
-                    "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
-                    "<div class=\"post-pinned\"></div>" + 
-                    val.question_text + 
-                    "<div class=\"post-metadata\">" +
-                    "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
-                    "</div>"
+                    "<span style=\"font-size: 20px; color: #3F3F41\">" +
+                    "There seems to be no posts..." +
+                    "</span>"
                 );
-            });
+            }//end if
+            else{
+                $.each(json_data, function(key, val){
+                    debugln("  " + key + "{" + val.question_id + ", " + val.question_text + ", " + val.question_category + "}");
+                    $("#posts").append(
+                        "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
+                        "<div class=\"post-pinned\"></div>" + 
+                        val.question_text + 
+                        "<div class=\"post-metadata\">" +
+                        "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
+                        "</div>"
+                    );
+                });
+            }//end else
         },//end function
         error: function(jqXHR, textStatus, errorThrown){
             displayAJAXError(
@@ -126,19 +135,28 @@ function getPosts(category){
         data: {qCategory: category},
         dataType: 'JSON',
         success: function(json_data){
-            //alert("posts found");
+            //alert(json_data.length + "\n" + json_data[0].returned);
             debugln("  found [" + json_data.length + "] posts!");
             debugln("  adding posts...");
-            $.each(json_data, function(key, val){
+            if((json_data.length == 1) && (json_data[0].returned == "false")){
                 $("#posts").append(
-                    "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
-                    "<div class=\"post-pinned\"></div>" + 
-                    val.question_text + 
-                    "<div class=\"post-metadata\">" +
-                    "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
-                    "</div>"
+                    "<span style=\"font-size: 20px; color: #3F3F41\">" +
+                    "There seems to be no posts for this category..." +
+                    "</span>"
                 );
-            });
+            }//end if
+            else{
+                $.each(json_data, function(key, val){
+                    $("#posts").append(
+                        "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
+                        "<div class=\"post-pinned\"></div>" + 
+                        val.question_text + 
+                        "<div class=\"post-metadata\">" +
+                        "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
+                        "</div>"
+                    );
+                });
+            }//end else
         },//end function
         error: function(jqXHR, textStatus, errorThrown){
             displayAJAXError(
@@ -163,19 +181,33 @@ function getCategories(){
             debugln("  found [" + json_data.length + "] categories!");
             categories = new Array(json_data.length);            
             debugln("  adding categories...");
-            $.each(json_data, function(key, val){
-                debugln("  " + val.category_id + " = " + val.category_name);
+            if((json_data.length == 1) && (json_data[0].returned == "false")){
                 $("#dropdown-cat").append(
-                    "<div id=\"" + val.category_name + "\" class=\"dropdown-cat-item\" onclick=\"categoryClicked(event)\">" +
-                    val.category_id + 
-                    "</div>"
+                    "<span style=\"font-size: 20px; color: #FFFFFF\">" +
+                    "Could not find any categories..." +
+                    "</span>"
                 );
                 $("#ask-form-cat").append(
-                    "<input type=\"radio\" name=\"category\" value=\"" + val.category_name + "\">" +
-                    val.category_name +
-                    "<br />"
+                    "<span style=\"font-size: 20px; color: #3F3F41\">" +
+                    "Could not find any categories..." +
+                    "</span>"
                 );
-            });
+            }//end if
+            else{
+                $.each(json_data, function(key, val){
+                    debugln("  " + val.category_id + " = " + val.category_name);
+                    $("#dropdown-cat").append(
+                        "<div id=\"" + val.category_name + "\" class=\"dropdown-cat-item\" onclick=\"categoryClicked(event)\">" +
+                        val.category_id + 
+                        "</div>"
+                    );
+                    $("#ask-form-cat").append(
+                        "<input type=\"radio\" name=\"category\" value=\"" + val.category_name + "\">" +
+                        val.category_name +
+                        "<br />"
+                    );
+                });
+            }//end else
             debugln("  adding clear div...");
             $("#dropdown-cat").append(
                 "<div class=\"clear\"></div>"
@@ -367,7 +399,10 @@ function postAnswer(event){
                     showComments(postID);
                 }//end if
                 else{
-                    alert("FAILED TO POST COMMENT\n  Uknown error occurred; try again.");
+                    displayFormError(
+                        "An unknown error occurred while posting answer",
+                        "Please try again."
+                    );
                 }//end else
             });
         },//end function
@@ -398,7 +433,7 @@ function postQuestion(event){
     var quesMore = $("#ask-form-more").val();
     debugln("  more: [" + quesMore + "]");
     debugln("  attempting to post question...");
-    alert("username: [" + userName + "]\ncategory: [" + cat + "]\nquestion: [" + ques + "]\nMore: [" + quesMore + "]");
+    //alert("username: [" + userName + "]\ncategory: [" + cat + "]\nquestion: [" + ques + "]\nMore: [" + quesMore + "]");
     $.ajax({
         type: "GET",
         url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushQuestion.php",
@@ -411,18 +446,23 @@ function postQuestion(event){
             $.each(json_data, function(key, val){
                 debugln("  " + val.posted);
                 if(val.posted == "true"){
-                    alert("POSTED! :D");
+                    //alert("POSTED! :D");
                     debugln("  clearing form data...");
                     $("#ask-form-question").val("");
                     $("#ask-form-more").val("");
                     $("#ask-form-cat > input").each(function(){
                         $(this).prop("checked", false);
                     });
-                    //TODO(Brendan): redirect to their thread
-                    //               if not DEFAULT_USER_ID, pin this thread too
+                    //alert("postQuestion id: [" + val.qID + "]");
+                    hideContent();
+                    $("#post").show(250);
+                    showPost(val.qID);
                 }//end if
                 else{
-                    alert("FAILED TO POST QUESTION\n  Uknown error occurred; try again.");
+                    displayFormError(
+                        "An unknown error occurred while posting question",
+                        "Please try again."
+                    );
                 }//end else
             });
         },//end function
@@ -454,19 +494,28 @@ function showComments(id){
         success: function(json_data){
             debugln("  found [" + json_data.length + "] questions");
             debugln("  adding new post...");
-            $.each(json_data, function(key, val){
-                debugln("  [" + key + "]: [" + val.question_text + "]");
+            if((json_data.length === 1) && (json_data[0].returned === "false")){
                 $("#post-comment-section").append(
-                    "<div class=\"comment\">" +
-                    "<div class=\"comment-upvote\"></div>" +
-                    "<div class=\"comment-downvote\"></div>" +
-                    val.response_text +
-                    "<div class=\"comment-metadata\">" +
-                    "answered by: " + val.responder_id + " [5 upvotes 1 downvote]" + 
-                    "</div>" +
-                    "</div>"
+                    "<span style=\"font-size: 10px; color: #3F3F41\">" +
+                    "No answers available... Be the first to answer this question!" +
+                    "</span>"
                 );
-            });
+            }//end if
+            else{
+                $.each(json_data, function(key, val){
+                    debugln("  [" + key + "]: [" + val.question_text + "]");
+                    $("#post-comment-section").append(
+                        "<div class=\"comment\">" +
+                        "<div class=\"comment-upvote\"></div>" +
+                        "<div class=\"comment-downvote\"></div>" +
+                        val.response_text +
+                        "<div class=\"comment-metadata\">" +
+                        "answered by: " + val.responder_id + " [5 upvotes 1 downvote]" + 
+                        "</div>" +
+                        "</div>"
+                    );
+                });
+            }//end else
         },//end function
         error: function(jqXHR, textStatus, errorThrown){
             displayAJAXError(
@@ -480,7 +529,7 @@ function showComments(id){
 
 function showPost(id){
     debugln("BEGIN showPost");
-    var categories;
+    //alert("showPost id: [" + id + "]");
     debugln("  clearing old post...");
     $("#post-question").empty();
     debugln("  getting AJAX for post ID [" + id + "]...");
