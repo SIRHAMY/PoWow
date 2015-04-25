@@ -29,26 +29,26 @@ function displayAJAXError(message, jqXHR, textStatus, errorThrown){
         "<ul>" +
             "<li>" +
                 "Response Text:<br />" + 
-                "&nbsp;&nbsp;" + jqXHR.responseText +
-            "</li>" +
+                "&nbsp;&nbsp;[" + jqXHR.responseText +
+            "]</li>" +
             /*
             "<li>" +
                 "Response XML:<br />" +
-                "&nbsp;&nbsp;" + jqXHR.responseXML +
-            "</li>" +
+                "&nbsp;&nbsp;[" + jqXHR.responseXML +
+            "]</li>" +
             "<li>" +
                 "Response Header:<br />" +
-                "&nbsp;&nbsp;" + jqXHR.getResponseHeader +
-            "</li>" +
+                "&nbsp;&nbsp;[" + jqXHR.getResponseHeader +
+            "]</li>" +
             */
             "<li>" +
                 "Text Status:<br />" +
-                "&nbsp;&nbsp;" + textStatus +
-            "</li>" +
+                "&nbsp;&nbsp;[" + textStatus +
+            "]</li>" +
             "<li>" +
                 "Error Thrown:<br />" +
-                "&nbsp;&nbsp;" + errorThrown +
-            "</li>" +
+                "&nbsp;&nbsp;[" + errorThrown +
+            "]</li>" +
         "</ul>"
     );
     debugln("  showing error message...");
@@ -96,6 +96,7 @@ function getAllPosts(){
     $.ajax({
         type: "GET",
         url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/getAllQuestions.php",
+        data: {username: USER_ID},
         dataType: 'JSON',
         success: function(json_data){
             debugln("  found [" + json_data.length + "] posts!");
@@ -112,14 +113,26 @@ function getAllPosts(){
             else{
                 $.each(json_data, function(key, val){
                     debugln("  " + key + "{" + val.question_id + ", " + val.question_text + ", " + val.question_category + "}");
-                    $("#posts").append(
-                        "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
-                        "<div class=\"post-pinned\"></div>" + 
-                        val.question_text + 
-                        "<div class=\"post-metadata\">" +
-                        "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
-                        "</div>"
-                    );
+                    if(val.pinned == "true"){
+                        $("#posts").append(
+                            "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
+                            "<div class=\"post-pinned\"></div>" + 
+                            val.question_text + 
+                            "<div class=\"post-metadata\">" +
+                            "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
+                            "</div>"
+                        );
+                    }//end if
+                    else{
+                        $("#posts").append(
+                            "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
+                            "<div class=\"post-not-pinned\"></div>" + 
+                            val.question_text + 
+                            "<div class=\"post-metadata\">" +
+                            "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
+                            "</div>"
+                        );
+                    }//end else
                 });
             }//end else
         },//end function
@@ -130,6 +143,8 @@ function getAllPosts(){
             );
         }//end function
     });
+    hideContent();
+    $("#posts").show(250);
     debugln("END getAllPosts");
 }//end function
 
@@ -141,7 +156,7 @@ function getPosts(category){
     $.ajax({
         type: "GET",
         url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/getCatQuestions.php",
-        data: {qCategory: category},
+        data: {qCategory: category, username: USER_ID},
         dataType: 'JSON',
         success: function(json_data){
             //alert(json_data.length + "\n" + json_data[0].returned);
@@ -156,14 +171,26 @@ function getPosts(category){
             }//end if
             else{
                 $.each(json_data, function(key, val){
-                    $("#posts").append(
-                        "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
-                        "<div class=\"post-pinned\"></div>" + 
-                        val.question_text + 
-                        "<div class=\"post-metadata\">" +
-                        "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
-                        "</div>"
-                    );
+                    if(val.pinned == "true"){
+                        $("#posts").append(
+                            "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
+                            "<div class=\"post-pinned\"></div>" + 
+                            val.question_text + 
+                            "<div class=\"post-metadata\">" +
+                            "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
+                            "</div>"
+                        );
+                    }//end if
+                    else{
+                        $("#posts").append(
+                            "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
+                            "<div class=\"post-not-pinned\"></div>" + 
+                            val.question_text + 
+                            "<div class=\"post-metadata\">" +
+                            "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
+                            "</div>"
+                        );
+                    }//end else
                 });
             }//end else
         },//end function
@@ -287,8 +314,7 @@ function login(event){
                             debugln("  showing my profile dropdown item...");
                             $("#dropdown-settings-profile").show();
                             debugln("  redirecting to home...");
-                            $("#login").hide();
-                            $("#posts").show(250);
+                            getAllPosts();
                         }//end if
                         else{
                             USER_ID = DEFAULT_USER_ID;
@@ -587,26 +613,43 @@ function showPost(id){
     $.ajax({
         type: "GET",
         url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/getQuestion.php",
-        data: {qID: id},
+        data: {qID: id, username: USER_ID},
         dataType: 'JSON',
         success: function(json_data){
             debugln("  found [" + json_data.length + "] questions");
             debugln("  adding new post...");
             $.each(json_data, function(key, val){
                 debugln("  [" + key + "]: [" + val.question_text + "]");
-                $("#post-question").append(
-                    "<div class=\"post-pinned\"></div>" + 
-                    "<div id=\"post-question-title\">" +
-                    val.question_text +
-                    "</div>" +
-                    "<div id=\"post-question-metadata\" class=\"post-metadata\">" +
-                        "asked by: " + val.asker_id + " in " + val.question_category + " [256 answers 4 pins]"+
-                    "</div>" +
-                    "<hr />" +
-                    "<div id=\"post-question-more\">" +
-                        val.question_description +
-                    "</div>"
-                );
+                if(val.pinned == "true"){
+                    $("#post-question").append(
+                        "<div class=\"post-pinned\"></div>" + 
+                        "<div id=\"post-question-title\">" +
+                        val.question_text +
+                        "</div>" +
+                        "<div id=\"post-question-metadata\" class=\"post-metadata\">" +
+                            "asked by: " + val.asker_id + " in " + val.question_category + " [256 answers 4 pins]"+
+                        "</div>" +
+                        "<hr />" +
+                        "<div id=\"post-question-more\">" +
+                            val.question_description +
+                        "</div>"
+                    );
+                }//end if
+                else{
+                    $("#post-question").append(
+                        "<div class=\"post-not-pinned\"></div>" + 
+                        "<div id=\"post-question-title\">" +
+                        val.question_text +
+                        "</div>" +
+                        "<div id=\"post-question-metadata\" class=\"post-metadata\">" +
+                            "asked by: " + val.asker_id + " in " + val.question_category + " [256 answers 4 pins]"+
+                        "</div>" +
+                        "<hr />" +
+                        "<div id=\"post-question-more\">" +
+                            val.question_description +
+                        "</div>"
+                    );
+                }//end else
             });
         },//end function
         error: function(jqXHR, textStatus, errorThrown){

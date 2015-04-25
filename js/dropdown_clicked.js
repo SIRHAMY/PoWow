@@ -61,6 +61,7 @@ function dropdownSettingsItem(event){
         $("#profile").show(250);
     }//end if
     else if(clickedId == "dropdown-settings-logout"){
+        USER_ID = DEFAULT_USER_ID;
         displaySuccess(
             "You have logged out of PoWoW."
         );
@@ -70,9 +71,10 @@ function dropdownSettingsItem(event){
         $("#dropdown-settings-profile").hide();
         debugln("  showing login dropdown item...");
         $("#dropdown-settings-login").show();
-        debugln("  showing login form...");
-        $("#login").show(250);
-        USER_ID = DEFAULT_USER_ID;
+        debugln("  reloading all posts");
+        getAllPosts();
+        debugln("  showing success message");
+        $("#success").show();
     }//end else if
     debugln("END dropdownSettingsItem");
 }//end method

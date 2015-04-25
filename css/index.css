@@ -78,15 +78,18 @@
     padding: 2px;
 }
 
-.post-pinned {
+.post-not-pinned {
     background-image: url("./../img/pin-grey_25x25.png");
     display: inline-block;
     height: 25px;
     width: 25px;
 }
 
-.post-pinned:hover {
+.post-pinned {
     background-image: url("./../img/pin-orange_25x25.png");
+    display: inline-block;
+    height: 25px;
+    width: 25px;
 }
 
 .post-title {
