@@ -1,6 +1,9 @@
 
 var DEFAULT_USER_ID = "Anonymous";
 var USER_ID = DEFAULT_USER_ID;
+var MAX_COMMENT_LENGTH = 1000;
+var MAX_QUESTION_TITLE_LENGTH = 70;
+var MAX_QUESTION_DETAILS_LENGTH = 1000;
 
 $(document).ready(function(){
     getAllPosts();
@@ -12,7 +15,9 @@ $(document).ready(function(){
 
 function displayAJAXError(message, jqXHR, textStatus, errorThrown){
     debugln("BEGIN displayAJAXError");
-    debugln("  clearing error message...");
+    debugln("  hiding success div...");
+    $("#success").hide();
+    debugln("  emptying previous error message...");
     $("#error-message").empty();
     $("#error-details").empty();
     debugln("  generating content...");
@@ -53,7 +58,9 @@ function displayAJAXError(message, jqXHR, textStatus, errorThrown){
 
 function displayFormError(error, errorDetails){
     debugln("BEGIN displayFormError");
-    debugln("  clearing error message...");
+    debugln("  hiding success div...");
+    $("#success").hide();
+    debugln("  emptying previous error message...");
     $("#error-message").empty();
     $("#error-details").empty();
     debugln("  generating content...");
@@ -70,6 +77,8 @@ function displayFormError(error, errorDetails){
 
 function displaySuccess(message){
     debugln("BEGIN displaySuccess");
+    debugln("hiding error div...");
+    $("#error").hide();
     debugln("  clearing success message...");
     $("#success-message").empty();
     debugln("  generating content...");
@@ -377,42 +386,55 @@ function postAnswer(event){
     debugln("  postID: [" + postID + "]");
     debugln("  getting comment...");
     var comment = $("#post-comment-form-val").val();
-    debugln("  comment: [" + comment + "]");
-    debugln("  attempting to post question...");
-    //alert("username: [" + userName + "]\npostID: [" + postID + "]\ncomment: [" + comment + "]");
-    $.ajax({
-        type: "GET",
-        url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushResponse.php",
-        data: {responderID: userName, origQuestion: postID, responseText: comment},
-        dataType: 'JSON',
-        success: function(json_data, textStatus, jqXHR){
-            //alert("comment sent! [" + textStatus + "]");
-            debugln("  found [" + json_data.length + "]  object");
-            debugln("  adding new comment...");
-            $.each(json_data, function(key, val){
-                debugln("  " + val.posted);
-                if(val.posted == "true"){
-                    //alert("POSTED! :D");
-                    debugln("  clearing comment form...");
-                    $("#post-comment-form-val").val("");
-                    debugln("  refreshing comment section...");
-                    showComments(postID);
-                }//end if
-                else{
-                    displayFormError(
-                        "An unknown error occurred while posting answer",
-                        "Please try again."
-                    );
-                }//end else
-            });
-        },//end function
-        error: function(jqXHR, textStatus, errorThrown){
-            displayAJAXError(
-                  "Something went wrong when posting answer",
-                  jqXHR, textStatus, errorThrown                  
-            );
-        }//end function
-    });
+    debugln("  checking comment length...");
+    if(comment.length <= MAX_COMMENT_LENGTH){
+        comment = encodeURIComponent(comment);
+        //alert(comment);
+        debugln("  comment: [" + comment + "]");
+        debugln("  attempting to post question...");
+        //alert("username: [" + userName + "]\npostID: [" + postID + "]\ncomment: [" + comment + "]");
+        $.ajax({
+            type: "GET",
+            url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushResponse.php",
+            data: {responderID: userName, origQuestion: postID, responseText: comment},
+            dataType: 'JSON',
+            success: function(json_data, textStatus, jqXHR){
+                //alert("comment sent! [" + textStatus + "]");
+                debugln("  found [" + json_data.length + "]  object");
+                debugln("  adding new comment...");
+                $.each(json_data, function(key, val){
+                    debugln("  " + val.posted);
+                    if(val.posted == "true"){
+                        //alert("POSTED! :D");
+                        debugln("  clearing comment form...");
+                        $("#post-comment-form-val").val("");
+                        debugln("  refreshing comment section...");
+                        showComments(postID);
+                    }//end if
+                    else{
+                        displayFormError(
+                            "An unknown error occurred while posting answer",
+                            "Please try again."
+                        );
+                    }//end else
+                });
+            },//end function
+            error: function(jqXHR, textStatus, errorThrown){
+                displayAJAXError(
+                      "Something went wrong when posting answer",
+                      jqXHR, textStatus, errorThrown                  
+                );
+            }//end function
+        });
+    }//end if
+    else{
+        displayFormError(
+            "Answer is too long",
+            "Limit your answer to [" +
+            MAX_COMMENT_LENGTH +
+            "] characters"
+        );
+    }//end else
     debugln("END postAnswer");
     //?
     event.preventDefault();
@@ -427,52 +449,81 @@ function postQuestion(event){
     var cat = $("form input[type='radio']:checked").val();
     debugln("  category: [" + cat + "]");
     debugln("  getting question title...");
+    //alert("making question URI safe");
     var ques = $("#ask-form-question").val();
-    debugln("  password: [" + ques + "]");
+    ques = encodeURIComponent(ques);
+    debugln("  question: [" + ques + "]");
     debugln("  getting more info...");
+    //alert("making question details URI safe");
     var quesMore = $("#ask-form-more").val();
+    quesMore = encodeURIComponent(quesMore);
+    //alert("everything safe");
     debugln("  more: [" + quesMore + "]");
     debugln("  attempting to post question...");
     //alert("username: [" + userName + "]\ncategory: [" + cat + "]\nquestion: [" + ques + "]\nMore: [" + quesMore + "]");
-    $.ajax({
-        type: "GET",
-        url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushQuestion.php",
-        data: {askerID: userName, qCategory: cat, qText: ques, qDescription: quesMore},
-        dataType: 'JSON',
-        success: function(json_data, textStatus, jqXHR){
-            //alert("question sent! [" + textStatus + "]");
-            debugln("  found [" + json_data.length + "]  object");
-            debugln("  adding new post...");
-            $.each(json_data, function(key, val){
-                debugln("  " + val.posted);
-                if(val.posted == "true"){
-                    //alert("POSTED! :D");
-                    debugln("  clearing form data...");
-                    $("#ask-form-question").val("");
-                    $("#ask-form-more").val("");
-                    $("#ask-form-cat > input").each(function(){
-                        $(this).prop("checked", false);
-                    });
-                    //alert("postQuestion id: [" + val.qID + "]");
-                    hideContent();
-                    $("#post").show(250);
-                    showPost(val.qID);
-                }//end if
-                else{
-                    displayFormError(
-                        "An unknown error occurred while posting question",
-                        "Please try again."
-                    );
-                }//end else
-            });
-        },//end function
-        error: function(jqXHR, textStatus, errorThrown){
-            displayAJAXError(
-                  "Something went wrong when posting question",
-                  jqXHR, textStatus, errorThrown                  
+    var validQuesLength = (ques.length <= MAX_QUESTION_TITLE_LENGTH);
+    var validQuesMoreLength = (quesMore.length <= MAX_QUESTION_DETAILS_LENGTH);
+    var validLength = (validQuesLength && validQuesMoreLength);
+    if(validLength){
+        $.ajax({
+            type: "GET",
+            url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushQuestion.php",
+            data: {askerID: userName, qCategory: cat, qText: ques, qDescription: quesMore},
+            dataType: 'JSON',
+            success: function(json_data, textStatus, jqXHR){
+                //alert("question sent! [" + textStatus + "]");
+                debugln("  found [" + json_data.length + "]  object");
+                debugln("  adding new post...");
+                $.each(json_data, function(key, val){
+                    debugln("  " + val.posted);
+                    if(val.posted == "true"){
+                        //alert("POSTED! :D [" + val.qID + "]");
+                        debugln("  clearing form data...");
+                        $("#ask-form-question").val("");
+                        $("#ask-form-more").val("");
+                        $("#ask-form-cat > input").each(function(){
+                            $(this).prop("checked", false);
+                        });
+                        //alert("postQuestion id: [" + val.qID + "]");
+                        hideContent();
+                        $("#post").show(250);
+                        showPost(val.qID);
+                    }//end if
+                    else{
+                        displayFormError(
+                            "An unknown error occurred while posting question",
+                            "Please try again."
+                        );
+                    }//end else
+                });
+            },//end function
+            error: function(jqXHR, textStatus, errorThrown){
+                displayAJAXError(
+                      "Something went wrong when posting question",
+                      jqXHR, textStatus, errorThrown                  
+                );
+            }//end function
+        });
+    }//end if
+    else{
+        if(!validQuesLength){
+            displayFormError(
+                "Question too long.",
+                "Limit your question to [" +
+                MAX_QUESTION_TITLE_LENGTH +
+                "] characters. Use the More information field " +
+                "if you need more room."
             );
-        }//end function
-    });
+        }//end if
+        else{
+            displayFormError(
+                "Question information too long.",
+                "Limit your question to [" +
+                MAX_QUESTION_DETAILS_LENGTH +
+                "] characters. Consider condensing your question."
+            );
+        }//end else
+    }//end else
     debugln("END postQuestion");
     //?
     event.preventDefault();
