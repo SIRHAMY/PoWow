@@ -8,6 +8,11 @@
 function postClicked(event){
     debugln("BEGIN postClicked");
     var clickedId = event.target.id;
+    var clickedClass = event.target.className;
+    if(clickedClass == "post-metadata"){
+        clickedId = event.target.parentElement.id;
+    }//end if
+    //alert("id: [" + clickedId + "]\nclass: [" + clickedClass + "]");
     debugln("  clickedId: [" + clickedId + "]");
     debugln("  hiding content areas...");
     hideContent();
@@ -15,4 +20,4 @@ function postClicked(event){
     showComments(clickedId);
     $("#post").show(250);
     debugln("END postClicked");
-}//end function
+}//end function   
