@@ -126,7 +126,7 @@ function getAllPosts(){
                     else{
                         $("#posts").append(
                             "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
-                            "<div class=\"post-not-pinned\"></div>" + 
+                            "<div class=\"post-not-pinned\" onclick=\"pushPinned(event)\"></div>" + 
                             val.question_text + 
                             "<div class=\"post-metadata\">" +
                             "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
@@ -184,8 +184,7 @@ function getPinnedQuestions(){
         },//end function
         error: function(jqXHR, textStatus, errorThrown){
             displayAJAXError(
-                  "Something went wrong when pulling questions" +
-                  " for category [" + category + "]",
+                  "Something went wrong when getting recent pins",
                   jqXHR, textStatus, errorThrown                  
             );
         }//end function
@@ -229,7 +228,7 @@ function getPosts(category){
                     else{
                         $("#posts").append(
                             "<div id=\"" + val.question_id + "\"class=\"post\" onclick=\"postClicked(event)\">" +
-                            "<div class=\"post-not-pinned\"></div>" + 
+                            "<div class=\"post-not-pinned\" onclick=\"pushPinned(event)\"></div>" + 
                             val.question_text + 
                             "<div class=\"post-metadata\">" +
                             "asked by: " + val.asker_id + " in " + val.question_category + " [3 answers 0 pins]" +
@@ -278,9 +277,9 @@ function getCategories(){
                 $.each(json_data, function(key, val){
                     debugln("  " + val.category_id + " = " + val.category_name);
                     $("#dropdown-cat").append(
-                        "<div id=\"" + val.category_name + "\" class=\"dropdown-cat-item\" onclick=\"categoryClicked(event)\">" +
-                        val.category_id + 
-                        "</div>"
+                        "<img id=\"" + val.category_name + "\" class=\"dropdown-cat-item\" onclick=\"categoryClicked(event)\"" +
+                        "src=\"./../img/" + val.category_name + "_25x25.png\"" +
+                        " />"
                     );
                     $("#ask-form-cat").append(
                         "<input type=\"radio\" name=\"category\" value=\"" + val.category_name + "\">" +
@@ -356,8 +355,8 @@ function login(event){
                             $("#dropdown-settings-login").hide();
                             debugln("  showing logout dropdown item...");
                             $("#dropdown-settings-logout").show();
-                            debugln("  showing my profile dropdown item...");
-                            $("#dropdown-settings-profile").show();
+                            //debugln("  showing my profile dropdown item...");
+                            //$("#dropdown-settings-profile").show();
                             debugln("  redirecting to home...");
                             getAllPosts();
                         }//end if
@@ -600,6 +599,63 @@ function postQuestion(event){
     event.preventDefault();
 }//end function
 
+function pushPinned(event){
+    debugln("BEGIN pushPinned");
+    var clickedId = "";
+    var clickedClass = event.target.className;
+    if(clickedClass == "post-not-pinned"){
+        clickedId = event.target.parentElement.id;
+    }//end if
+    /*alert("clickedId: [" + clickedId + "]\n" +
+          "clickedClass: [" + clickedClass + "]\n" +
+          "id==\"\": [" + (clickedId == "") + "]"
+    );*/
+    if(clickedId != ""){
+        debugln("  id is NOT null");
+        if(USER_ID != DEFAULT_USER_ID){
+            debugln("  USER_ID is NOT default");
+            $.ajax({
+                type: "GET",
+                url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/pushPinned.php",
+                data: {qID: clickedId, username: USER_ID},
+                dataType: 'JSON',
+                success: function(json_data){
+                    debugln("  pinned");               
+                    $.each(json_data, function(key, val){
+                        var pinned = $("#" + clickedId + " > post-not-pinned");
+                        debugln("  removing grey pinned icon [" + pinned + "]");
+                        pinned.removeClass("post-not-pinned");
+                        debugln("  adding orange pinned icon [" + pinned + "]");
+                        pinned.addClass("post-pinned");
+                        debugln("  removing onclick event [" + pinned + "]");
+                        pinned.attr("onclick", "");
+                        displaySuccess(
+                            "Question pinned.  Click the pin icon on the " +
+                            "nav bar to view the pin"
+                        );
+                    });
+                },//end function
+                error: function(jqXHR, textStatus, errorThrown){
+                    displayAJAXError(
+                          "Something went wrong when pinning question",
+                          jqXHR, textStatus, errorThrown                  
+                    );
+                }//end function
+            });
+        }//end if
+        else{
+            displayFormError(
+                "Could not pin question",
+                "You must be logged in to pin a question"
+            );
+        }//end else
+    }//end if
+    else{
+        debugln("  id is null");
+    }//end else
+    debugln("END pushPinned");
+}//end function
+
 function showComments(id){
     debugln("BEGIN showComments");
     var categories;
@@ -614,8 +670,8 @@ function showComments(id){
         data: {qID: id},
         dataType: 'JSON',
         success: function(json_data){
-            debugln("  found [" + json_data.length + "] questions");
-            debugln("  adding new post...");
+            debugln("  found [" + json_data.length + "] comments");
+            debugln("  adding comments...");
             if((json_data.length === 1) && (json_data[0].returned === "false")){
                 $("#post-comment-section").append(
                     "<span style=\"font-size: 10px; color: #3F3F41\">" +
@@ -682,7 +738,7 @@ function showPost(id){
                 }//end if
                 else{
                     $("#post-question").append(
-                        "<div class=\"post-not-pinned\"></div>" + 
+                        "<div class=\"post-not-pinned\" onclick=\"pushPinned(event)\"></div>" + 
                         "<div id=\"post-question-title\">" +
                         val.question_text +
                         "</div>" +
