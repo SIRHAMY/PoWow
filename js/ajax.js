@@ -148,6 +148,51 @@ function getAllPosts(){
     debugln("END getAllPosts");
 }//end function
 
+function getPinnedQuestions(){
+    debugln("BEGIN getPinnedQuestions");
+    debugln("  clearing pinned activity");
+    $("#dropdown-pinned").empty();
+    //alert("getting pinned activity");
+    $.ajax({
+        type: "GET",
+        url: "http://default-environment-q4vew696kb.elasticbeanstalk.com/getPinnedQuestions.php",
+        data: {userID: USER_ID},
+        dataType: 'JSON',
+        success: function(json_data){
+            //alert(json_data.length + "\n" + json_data[0].returned);
+            debugln("  found [" + json_data.length + "] posts!");
+            debugln("  adding posts...");
+            if((json_data.length == 1) && (json_data[0].returned == "false")){
+                $("#dropdown-pinned").append(
+                    "<div class=\"dropdown-pinned-item\">" +
+                    "No recent pins" +
+                    "</div>"
+                );
+            }//end if
+            else{
+                $.each(json_data, function(key, val){
+                    $("#dropdown-pinned").append(
+                        "<div id=\"" + val.question_id + "\" " +
+                        "class=\"dropdown-pinned-item\" " +
+                        "onclick=\"dropdownPinnedItem(event)\"" + 
+                        ">" +
+                        val.question_text +
+                        "</div>"
+                    );
+                });
+            }//end else
+        },//end function
+        error: function(jqXHR, textStatus, errorThrown){
+            displayAJAXError(
+                  "Something went wrong when pulling questions" +
+                  " for category [" + category + "]",
+                  jqXHR, textStatus, errorThrown                  
+            );
+        }//end function
+    });
+    debugln("END getPinnedQuestions");
+}//end function
+
 function getPosts(category){
     debugln("BEGIN getPosts");
     debugln("  getting posts with category [" + category + "]...");

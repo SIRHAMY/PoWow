@@ -29,7 +29,8 @@ function dropdownPinnedItem(event){
     $("#dropdown-pinned").hide();
     debugln("  removing selected class...");
     $("#nav-pinned").removeClass("nav-selected");
-    //TODO(ALL): use AJAX to pull pin data
+    showPost(clickedId);
+    showComments(clickedId);
     debugln("  hiding content areas...");
     hideContent();
     $("#post").show(250);

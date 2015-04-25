@@ -53,6 +53,7 @@ function toggleDropdown(id){
     }//end if
     else if("nav-pinned" === id){
         debugln("    pinned");
+        getPinnedQuestions();
         $("#dropdown-pinned").toggle(250);
     }//end else if
     else if("nav-settings" === id){
